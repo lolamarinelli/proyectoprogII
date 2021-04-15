@@ -1,8 +1,12 @@
 let profile = require('../data/profile')
 let controller = {
-    show: function (req, res){
+    index: function (req, res){
         res.render('profile', {'profile': profile})
-    }
+    },
+    /* show: function (req, res){
+    res.render('profileEdit', {'profileEdit': profile})
+        }
+     */
 }
 
 module.exports = controller;
