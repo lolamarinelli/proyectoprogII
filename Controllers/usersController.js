@@ -3,10 +3,9 @@ let controller = {
     index: function (req, res){
         res.render('login', {'login': profile})
     },
-    /* show: function (req, res){
-    res.render('profileEdit', {'profileEdit': profile})
-        }
-     */
+    show: function (req, res){
+    res.render('register', {'register': profile})
+        } 
 }
 
 module.exports = controller;
