@@ -3,6 +3,7 @@ let profile = [
         id: 1,
         nombre: 'Lola',
         apellido: 'Marinelli'
+    
     },
     {
         id: 2,
