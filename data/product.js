@@ -33,6 +33,13 @@ let product = [
         imagen: '/images/products/jordans4.jpg',
         descripcion: 'esta es la descripcion del producto 5',
         comentarios: 11
+    },
+    {
+        id: 6,
+        modelo: 'Air Jordan 6',
+        imagen: '/images/products/jordans4.jpg',
+        descripcion: 'esta es la descripcion del producto 6',
+        comentarios: 25
     }
 ]
 
