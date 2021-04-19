@@ -36,90 +36,22 @@
 				<h2 class="products-title">Mis productos</h2>
 			</div>
 			<!-- Show mis productos -->
-			<div class="col-12 col-sm-6 col-lg-3">
-				<section class="product-box">
-					<a href="/product">
-						<figure class="product-box_image">
-							<img src="<%= product[0].imagen %>" alt="Jordans">
-						</figure>
-						<article class="product-box_data">
-							<h2> <%= product[0].modelo %> </h2>
-							<p> <%= product[0].descripcion %> </p>
-							<p> Comentarios: <%= product[0].comentarios %> </p>
-						</article> 
-					</a>
-				</section>
-			</div>
-			<div class="col-12 col-sm-6 col-lg-3">
-				<section class="product-box">
-					<a href="/product">
-						<figure class="product-box_image">
-							<img src="<%= product[1].imagen %>" alt="Jordans">
-						</figure>
-						<article class="product-box_data">
-							<h2> <%= product[1].modelo %> </h2>
-							<p> <%= product[1].descripcion %> </p>
-							<p> Comentarios: <%= product[1].comentarios %> </p>
-						</article> 
-					</a>
-				</section>
-			</div>
-			<div class="col-12 col-sm-6 col-lg-3">
-				<section class="product-box">
-					<a href="/product">
-						<figure class="product-box_image">
-							<img src="<%= product[2].imagen %>" alt="Jordans">
-						</figure>
-						<article class="product-box_data">
-							<h2> <%= product[2].modelo %> </h2>
-							<p> <%= product[2].descripcion %> </p>
-							<p> Comentarios: <%= product[2].comentarios %> </p>
-						</article> 
-					</a>
-				</section>
-			</div>
-			<div class="col-12 col-sm-6 col-lg-3">
-				<section class="product-box">
-					<a href="/product">
-						<figure class="product-box_image">
-							<img src="<%= product[3].imagen %>" alt="Jordans">
-						</figure>
-						<article class="product-box_data">
-							<h2> <%= product[3].modelo %> </h2>
-							<p> <%= product[3].descripcion %> </p>
-							<p> Comentarios: <%= product[3].comentarios %> </p>
-						</article> 
-					</a>
-				</section>
-			</div>
-			<div class="col-12 col-sm-6 col-lg-3">
-				<section class="product-box">
-					<a href="/product">
-						<figure class="product-box_image">
-							<img src="<%= product[4].imagen %>" alt="Jordans">
-						</figure>
-						<article class="product-box_data">
-							<h2> <%= product[4].modelo %> </h2>
-							<p> <%= product[4].descripcion %> </p>
-							<p> Comentarios: <%= product[4].comentarios %> </p>
-						</article> 
-					</a>
-				</section>
-			</div>
-			<div class="col-12 col-sm-6 col-lg-3">
-				<section class="product-box">
-					<a href="/product">
-						<figure class="product-box_image">
-							<img src="<%= product[5].imagen %>" alt="Jordans">
-						</figure>
-						<article class="product-box_data">
-							<h2> <%= product[5].modelo %> </h2>
-							<p> <%= product[5].descripcion %> </p>
-							<p> Comentarios: <%= product[5].comentarios %> </p>
-						</article> 
-					</a>
-				</section>
-			</div>
+			<% for(let i=0; i < product.length; i++) { %>
+				<div class="col-12 col-sm-6 col-lg-3">
+					<section class="product-box">
+						<a href="/product">
+							<figure class="product-box_image">
+								<img src="<%= product[i].imagen %>" alt="Jordans">
+							</figure>
+							<article class="product-box_data">
+								<h2> <%= product[i].modelo %> </h2>
+								<p> <%= product[i].descripcion %> </p>
+								<p> Comentarios: <%= product[i].comentarios %> </p>
+							</article> 
+						</a>
+					</section>
+				</div>
+			<% } %>
 		</div>
 	</div>
 	<!-- /Mis productos -->
