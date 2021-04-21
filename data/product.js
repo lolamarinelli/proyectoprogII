@@ -40,7 +40,35 @@ let product = [
         imagen: '/images/products/jordans4.jpg',
         descripcion: 'esta es la descripcion del producto 6',
         comentarios: 25
-    }
+    },
+    {
+        id: 7,
+        modelo: 'Air Jordan 7',
+        imagen: '/images/products/jordans.jpg',
+        descripcion: 'esta es la descripcion del producto 7',
+        comentarios: 10
+    },
+    {
+        id: 8,
+        modelo: 'Air Jordan 8',
+        imagen: '/images/products/jordans1.jpg',
+        descripcion: 'esta es la descripcion del producto 8',
+        comentarios: 2
+    },
+    {
+        id: 9,
+        modelo: 'Air Jordan 9',
+        imagen: '/images/products/jordans2.jpg',
+        descripcion: 'esta es la descripcion del producto 9',
+        comentarios: 7
+    },
+    {
+        id: 10,
+        modelo: 'Air Jordan 10',
+        imagen: '/images/products/jordans3.jpg',
+        descripcion: 'esta es la descripcion del producto 10',
+        comentarios: 13
+    },
 ]
 
 module.exports = product

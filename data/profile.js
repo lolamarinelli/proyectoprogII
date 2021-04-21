@@ -33,6 +33,28 @@ let profile = [
         seguidores: 2,
         comentarios: 1
     },
+    {
+        id: 4,
+        nombre: 'Juana',
+        apellido: 'Garcia',
+        fechaNac: 20/04/99,
+        email: "jgarcia@udesa.edu.ar",
+        contraseña: "1234",
+        productos: 4,
+        seguidores: 7,
+        comentarios: 1
+    },
+    {
+        id: 5,
+        nombre: 'Mateo',
+        apellido: 'Lopez',
+        fechaNac: 1/09/04,
+        email: "mlopez@udesa.edu.ar",
+        contraseña: "1234",
+        productos: 1,
+        seguidores: 5,
+        comentarios: 6
+    },
 ]
 
 module.exports = profile
