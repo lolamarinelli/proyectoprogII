@@ -6,6 +6,7 @@ let profile = [
         fecha: 05/04/02,
         email: "lmarinelli@udesa.edu.ar",
         contraseña: "1234",
+        image: '/images/users/face-amico.png',
         productos: 5,
         seguidores: 4,
         comentarios: 3
@@ -17,6 +18,7 @@ let profile = [
         fecha: 27/08/01,
         email: "mbaylac@udesa.edu.ar",
         contraseña: "1234",
+        image: '/images/users/face-pana.png',
         productos: 8,
         seguidores: 7,
         comentarios: 6
@@ -29,6 +31,7 @@ let profile = [
         fecha: 19/02/02,
         email: "mcappelloni@udesa.edu.ar",
         contraseña: "1234",
+        image: '/images/users/face-cuate.png',
         productos: 3,
         seguidores: 2,
         comentarios: 1
@@ -39,6 +42,7 @@ let profile = [
         apellido: 'Garcia',
         fecha: 20/04/99,
         email: "jgarcia@udesa.edu.ar",
+        image: '/images/users/face-rafiki.png',
         contraseña: "1234",
         productos: 4,
         seguidores: 7,
@@ -50,6 +54,7 @@ let profile = [
         apellido: 'Lopez',
         fecha: 1/09/04,
         email: "mlopez@udesa.edu.ar",
+        image: '/images/users/face-bro.png',
         contraseña: "1234",
         productos: 1,
         seguidores: 5,
