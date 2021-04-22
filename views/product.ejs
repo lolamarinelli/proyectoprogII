@@ -4,9 +4,8 @@
 	
 	<!-- product detail -->
 	<div class="container products-wrapper">
-		<% for(let i=0; i < product.length; i++) { %>
 		<div class="d-flex align-items-center">
-			<h2 class="products-title"><%= product[i].modelo %></h2> 
+			<h2 class="products-title"><%= product.modelo %></h2> 
 			<p class="product-detail-description">
 				<a href="/product/product-add">Editar</a>
 			</p>
@@ -14,15 +13,15 @@
 		<div class="product-detail">
 			<div class="row">
 				<article class="col-12 col-lg-8 product-detail-info">
-					<img src="<%= product[i].imagen %>" alt="" class="product-detail-img">
+					<img src="<%= product.imagen %>" alt="" class="product-detail-img">
 					<p class="product-detail-description">
-						<%= product[i].descripcion %></p>
+						<%= product.descripcion %></p>
 				</article>
 				<div class="col-12 col-lg-4">
 					<section class="comments">
 						<% for(let i=0; i < comentarios.length; i++) { %>
 							<article>
-							<img src="https://via.placeholder.com/35" alt="">
+							<img src="<%= profile[i].image %>" alt="">
 								<div class="data">
 									<p class="user">
 									<strong> <a href="/profile"><%= comentarios[i].usuario%> : </a> </strong>
@@ -39,7 +38,6 @@
 				</div>
 			</div>
 		</div>
-		<% } %>
 	</div>
 	<!-- /product detail -->
 

@@ -15,13 +15,13 @@ let controller = {
     },
     id: function(req, res){
        let ids = req.params.id
-        let resultados = []
+        let resultado = {};
         for (let i = 0; i < product.length; i++) {
            if (product[i].id == ids){
-                resultados.push(product[i])  
+                resultado = product[i];
             }            
         }
-       res.render("product", {'product': resultados, profile, product, comentarios})
+       res.render("product", {'product': resultado, profile, comentarios})
     },
 }
 
