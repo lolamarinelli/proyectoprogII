@@ -4,8 +4,9 @@
 	
 	<!-- product detail -->
 	<div class="container products-wrapper">
+		<% for(let i=0; i < product.length; i++) { %>
 		<div class="d-flex align-items-center">
-			<h2 class="products-title"><%= product[0].modelo %></h2> 
+			<h2 class="products-title"><%= product[i].modelo %></h2> 
 			<p class="product-detail-description">
 				<a href="/product/product-add">Editar</a>
 			</p>
@@ -13,9 +14,9 @@
 		<div class="product-detail">
 			<div class="row">
 				<article class="col-12 col-lg-8 product-detail-info">
-					<img src="<%= product[0].imagen %>" alt="" class="product-detail-img">
+					<img src="<%= product[i].imagen %>" alt="" class="product-detail-img">
 					<p class="product-detail-description">
-						<%= product[0].descripcion %></p>
+						<%= product[i].descripcion %></p>
 				</article>
 				<div class="col-12 col-lg-4">
 					<section class="comments">
@@ -38,6 +39,7 @@
 				</div>
 			</div>
 		</div>
+		<% } %>
 	</div>
 	<!-- /product detail -->
 

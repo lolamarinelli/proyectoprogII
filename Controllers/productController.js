@@ -12,7 +12,17 @@ let controller = {
     },
     results: function (req, res){
         res.render('search-results', {'product': product, profile, comentarios})
-    }
+    },
+    id: function(req, res){
+       let ids = req.params.id
+        let resultados = []
+        for (let i = 0; i < product.length; i++) {
+           if (product[i].id == ids){
+                resultados.push(product[i])  
+            }            
+        }
+       res.render("product", {'product': resultados, profile, product, comentarios})
+    },
 }
 
 module.exports = controller;
