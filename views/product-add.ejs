@@ -10,7 +10,24 @@
 			</div>
 			<!-- Show the "ultimos" products -->
 			<h2 class="col-12"> 
-				<form action="/product" method="GET">
+				<form class="row g-3">
+					<div class="col-12">
+					  <label for="inputAddress" class="form-label">Modelo</label>
+					  <input type="text" class="form-control modelo" id="modelo" placeholder="Escribe aquí el modelo ">
+					</div>
+					<div class="col-md-6">
+						<label for="inputPassword4" class="form-label">Descripción</label>
+						<textarea name="Descripción" class="form-control descrip" id="descripcion" cols="30" rows="5"></textarea>
+					  </div>
+					<div class="col-md-6">
+						<label for="inputEmail4" class="form-label">Imagen</label>
+						<input type="image" class="form-control" id="email" src="https://via.placeholder.com/150" alt="submit" width="100" height="100">
+					  </div>
+					<div class="col-12">
+					  <button type="submit" class="btn btn-primary">Agregar Producto</button>
+					</div>
+				  </form>
+				<!-- <form action="/product" method="GET">
 					<p>
 						<label for="">Modelo</label>
 						<input type="text" name="modelo" id="modelo">
@@ -26,7 +43,7 @@
 					<p>
 						<button type="submit">Agregar Producto</button>
 					</p>
-			</form>
+			</form> -->
 			</h2>
 
 
