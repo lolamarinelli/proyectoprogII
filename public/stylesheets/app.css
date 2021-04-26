@@ -454,6 +454,12 @@ hr {
 .comments .user{
   font-size: 1.7em;
 }
+.user a:hover{
+color: var(--red)
+}
+
+
+
 
 /*====== Formularios ======*/
 .form-label {
