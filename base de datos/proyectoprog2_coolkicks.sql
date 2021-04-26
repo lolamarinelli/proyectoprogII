@@ -35,11 +35,6 @@ ADD users_id INT NOT NULL;
 ALTER TABLE comentarios
 ADD FOREIGN KEY (users_id) REFERENCES users(id);
 
-ALTER TABLE product
-ADD comentarios_id INT UNSIGNED NOT NULL;
-
-ALTER TABLE product
-ADD FOREIGN KEY (comentarios_id) REFERENCES comentarios(id);
 
 ALTER TABLE comentarios 
 ADD product_id INT UNSIGNED NOT NULL;
