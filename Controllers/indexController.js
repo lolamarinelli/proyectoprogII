@@ -1,5 +1,6 @@
 let product = require('../data/product')
 let profile = require('../data/profile')
+let db = require("../database/models")
 
 let controller = {
     index: function (req, res){
