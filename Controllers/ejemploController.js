@@ -1,104 +1,44 @@
-const db = require('../database/models');
-const movie = db.Movie;
+/* const db = require('../database/models')
+const op = db.Sequelize.Op
+const bcrypt = require('bcryptjs')
 
-const op = db.Sequelize.Op;
-
-
-let moviesController = {
-    index: (req, res)=>{
-        movie.findAll()
-            .then((resultados)=> res.render('movies', { resultados }))
-            .catch((err)=> `Error: ${err}`)
+module.exports = {
+    register: (req, res) => {
+        res.render('register')
     },
-    show: (req, res)=>{
-        let primaryKey = req.params.id;
-        movie.findByPk(primaryKey)
-            .then(resultados => res.render('movie', {resultados}))
-            .catch( err => console.log(err))
-
-    },
-    search: (req, res)=>{
-        let searchDatad = req.query.search;
-        movie.findAll({
-            where: [
-                { title: {[op.like]: `%${searchDatad}%`}}
-            ]
+    store: (req, res) => {
+        let user = {
+            first_name: req.body.first_name,
+            last_name: req.body.last_name,
+            email: req.body.email,
+            password: bcrypt.hashSync(req.body.password, 10)
+        }
+        db.User.create(user)
+        .then(user => {
+            res.redirect('/')
         })
-            .then(resultados => res.render('searchResults', { resultados }))
-            .catch(err=> console.log(err))
+    },
+    login: (req, res) => {
+        res.render('login')
+    },
+    processLogin: (req, res) => {
         
+        db.User.findOne({
+            where: [{ email: req.body.email }]
+        })
+        .then(user => {
+            req.session.user = user
+            if(req.body.recordame){
+                res.cookie('userId', user.id, {maxAge: 1000 * 60 * 10})
+            }
+            return res.redirect('/')
+        })
+        .catch( error => console.log(error))
     },
-    add: (req, res)=>{
-        return res.render('movieAdd')
-    },
-    store: (req, res)=>{
-        
-        let movie = {
-            title: req.body.title,
-            rating: req.body.rating,
-            awards: req.body.awards,
-            length: req.body.length,
-            genre_id:req.body.genre_id
-        } 
+    logout: (req, res) => {
+        req.session.destroy()
+        res.clearCookie('userId')
 
-        db.Movie.create(movie)
-        //return res.redirect('/movies')
-            .then(() => res.redirect('/movies'))
-            .catch(err => console.log(err))
-    },
-    borrar: (req, res)=>{
-        let primaryKey = req.params.id;
-        movie.destroy({
-            where: {
-                id: primaryKey
-            }
-        })
-        .then(()=> res.redirect('/movies'))
-        .catch(err=> console.log(err))
-    },
-    destroy: (req, res)=>{
-        let primaryKey = req.params.id;
-        //console.log(primaryKey);
-         movie.destroy({
-            where: {
-                id: primaryKey
-            }
-        })
-        .then(()=> res.redirect('/movies'))
-        .catch(err=> console.log(err))
-    },
-    edit: (req, res)=>{
-        let primaryKey = req.params.id;
-        movie.findByPk(primaryKey)
-            .then(resultados => res.render('movieEdit', { resultados }))
-            .catch(err => console.log(err))
-    }, 
-    update: (req, res)=>{   
-        let primaryKey = req.params.id;
-        let peliculaActualizar = req.body
-        movie.update(
-            peliculaActualizar, 
-            {
-                where: {
-                    id: primaryKey
-                }
-            }
-        )
-            .then(()=> res.redirect('/movies'))
-            .catch(err => console.log(err))
+        return res.redirect('/')
     }
-/*    
-    sql : (req, res)=>{
-        db.sequelize.query("SELECT * FROM movies")
-            .then((resultados)=>{
-                //console.log(resultados[0])
-                let peliculas = resultados[0];
-                return res.render('sql', {peliculas})
-            })
-            .catch((error)=> console.log(`Error : ${error}`))
-        
-    }, 
-*/     
-}
-
-module.exports = moviesController;
+} */
