@@ -17,7 +17,7 @@ module.exports = (sequelize, dataTypes)=>{
             type: dataTypes.STRING
         },
         password: {
-            type: dataTypes.STRING //CONFIRMAR SI ES ASI
+            type: dataTypes.STRING 
         },
         image :{
             type: dataTypes.STRING
@@ -37,7 +37,7 @@ module.exports = (sequelize, dataTypes)=>{
 
     };
     let config = {
-        table: "users",
+        tableName: "users",
         timestamps: false,
         underscored: true
     }

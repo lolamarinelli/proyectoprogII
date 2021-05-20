@@ -1,35 +1,29 @@
 module.exports = (sequelize, dataTypes)=>{
 
-    let alias = 'Product';
+    let alias = 'Comentario';
     let cols = {
             id: {
             autoIncrement: true,
             primaryKey: true,
             type: dataTypes.INTEGER
         },
-        modelo: {
-            type: dataTypes.STRING
-        },
-        image: {
-            type: dataTypes.STRING
-        },
-        descripcion: {
-            type: dataTypes.STRING
-        },
-        comentarios: {
+        comentario: {
             type: dataTypes.STRING 
         },
         fecha :{
             type: dataTypes.DATE
         },
+
+        // Falta agregar product_id y users_id --> foreign keys
+
     };
 
    let config = {
-       tableName: "product",
+       tableName: "comentarios",
        timestamps: false,
        underscored: true,
    }
-   const Product = sequelize.define(alias, cols, config)
-    return Product;
+   const Comentario = sequelize.define(alias, cols, config)
+    return Comentario;
     
 };
