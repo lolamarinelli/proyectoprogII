@@ -1,17 +1,19 @@
-let product = require('../data/product')
-let profile = require('../data/profile')
-let comentarios = require('../data/comentarios')
-
+const db = require('../database/models')
+const product = db.Product
+const profile = db.User
+const comentarios = db.Comentario
+const op = db.Sequelize.Op
+const bcrypt = require('bcryptjs') 
 
 let controller = {
-    index: function (req, res){
-        res.render('product', {'product': product, profile, comentarios})
+    product: function (req, res){
+        res.render('product', {product, profile, comentarios})
     },
     add: function (req, res){
-        res.render('product-add', {'product': product, profile, comentarios})
+        res.render('product-add', {product, profile, comentarios})
     },
     results: function (req, res){
-        res.render('search-results', {'product': product, profile, comentarios})
+        res.render('search-results', {product, profile, comentarios})
     },
     id: function(req, res){
        let ids = req.params.id
@@ -21,7 +23,7 @@ let controller = {
                 resultado = product[i];
             }            
         }
-       res.render("product", {'product': resultado, profile, comentarios})
+       res.render("product", {product, profile, comentarios})
     },
 }
 
