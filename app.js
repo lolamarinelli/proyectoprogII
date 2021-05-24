@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+// Requerimos session para configurarlo
+const session = require('express-session')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -21,6 +23,32 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  secret:"Nuestro string secreto", //fijarnos si es asi
+  resave: false,
+  saveUninitialized:true
+}))
+//Configuramos locals para pasar informacion a todas las vistas
+app.use((req, res, next) => {
+  if(req.session.user != undefined){
+    res.locals = req.session.user
+  }
+  return next()
+})
+
+app.use((req, res, next) => {
+  if(req.cookies.user_id && req.session.user == undefined){
+
+    db.User.findByPk(req.cookies.user_id)
+      .then(user =>{
+        req.session.user = user
+        res.locals = req.session.user
+
+      })
+      .catch( error => console.log(error))
+  }
+  return next()
+})
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

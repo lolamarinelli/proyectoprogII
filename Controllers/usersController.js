@@ -1,5 +1,3 @@
-// let profile = require('../data/profile')
-
 const db = require('../database/models')
 const user = db.User
 const op = db.Sequelize.Op
@@ -7,11 +5,11 @@ const bcrypt = require('bcryptjs')
 
 let controller = {
     login: function (req, res){
-        res.render('login', {'login': profile})
+        res.render('login')
     },
     register: function (req, res){
-    res.render('register', {'register': profile})
-        },
+        res.render('register')
+    },
     store: (req, res) => {
         let user = {
             nombre: req.body.nombre,
@@ -23,28 +21,25 @@ let controller = {
         db.User.create(user)
             .then(() => res.redirect('/users'))
             .catch( error => console.log(error))    
-        },
+    },
     processLogin: (req, res) => {
-        
         db.User.findOne({
             where: [{ email: req.body.email }]
         })
         .then(user => {
             req.session.user = user
             if(req.body.recordame){
-                res.cookie('userId', user.id, {maxAge: 1000 * 60 * 10})
+                res.cookie('user_id', user.id, {maxAge: 1000 * 60 * 10}) //chequear si es user.id
             }
             return res.redirect('/')
         })
         .catch( error => console.log(error))
     },
-
-
-
-
-
-
-
+    logout: (req, res) => {
+        req.session.destroy()
+        res.clearCookie('user_id')
+        return res.redirect('/')
+    },
 }
 
 
