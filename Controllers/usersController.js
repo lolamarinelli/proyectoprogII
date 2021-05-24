@@ -1,8 +1,9 @@
 // let profile = require('../data/profile')
 
 const db = require('../database/models')
+const user = db.User
 const op = db.Sequelize.Op
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs') 
 
 let controller = {
     login: function (req, res){
@@ -20,10 +21,9 @@ let controller = {
             password: bcrypt.hashSync(req.body.password, 10)
         }
         db.User.create(user)
-        .then(user => {
-            res.redirect('/users')
-        })
-    },
+            .then(() => res.redirect('/users'))
+            .catch( error => console.log(error))    
+        },
     processLogin: (req, res) => {
         
         db.User.findOne({
