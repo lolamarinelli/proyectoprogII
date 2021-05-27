@@ -1,5 +1,11 @@
 	<!-- Header -->
-	<%- include('partials/header.ejs') %>
+	<%if (usuarioLogueado =! null ) { %>
+		<%- include('partials/headerLogueado.ejs') %>
+		<% }else { %>
+			<%- include('partials/header.ejs') %>
+			<%}%>
+	
+
 	<!-- /Header -->
 	
 	<!-- Banner -->

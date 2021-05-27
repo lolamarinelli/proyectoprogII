@@ -22,6 +22,14 @@ module.exports = (sequelize, dataTypes)=>{
         fecha :{
             type: dataTypes.DATE
         },
+        created_at: {
+            type: dataTypes.DATE,
+            allowNull: true,
+        },
+        updated_at: {
+            type: dataTypes.DATE,
+            allowNull: true,
+        },
     };
 
    let config = {

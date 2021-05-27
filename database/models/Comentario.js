@@ -13,9 +13,15 @@ module.exports = (sequelize, dataTypes)=>{
         fecha :{
             type: dataTypes.DATE
         },
-
         // Falta agregar product_id y users_id --> foreign keys
-
+        created_at: {
+            type: dataTypes.DATE,
+            allowNull: true,
+        },
+        updated_at: {
+            type: dataTypes.DATE,
+            allowNull: true,
+        },
     };
 
    let config = {

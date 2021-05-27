@@ -34,6 +34,14 @@ module.exports = (sequelize, dataTypes)=>{
         comentarios :{
             type: dataTypes.INTEGER
         },
+        created_at: {
+            type: dataTypes.DATE,
+            allowNull: true,
+        },
+        updated_at: {
+            type: dataTypes.DATE,
+            allowNull: true,
+        },
 
     };
     let config = {
