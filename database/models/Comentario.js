@@ -13,8 +13,14 @@ module.exports = (sequelize, dataTypes)=>{
         fecha :{
             type: dataTypes.DATE
         },
-        // Falta agregar product_id y users_id --> foreign keys
-        created_at: {
+        // chequear Foreign Keys
+        product_id: {
+            type: dataTypes.INTEGER
+        },
+        users_id: {
+            type: dataTypes.INTEGER
+        },
+      created_at: {
             type: dataTypes.DATE,
             allowNull: true,
         },
@@ -30,6 +36,18 @@ module.exports = (sequelize, dataTypes)=>{
        underscored: true,
    }
    const Comentario = sequelize.define(alias, cols, config)
+   Comentario.associate = (models) => {
+       Comentario.belongsTo(models.Product, {
+           as: "product",
+           foreignKey: "product_id"
+       })
+       Comentario.belongsTo(models.User,{
+           as: "users",
+           foreignKey: "users_id"
+       })
+
+   }
+
     return Comentario;
     
 };
