@@ -1,49 +1,116 @@
 const db = require('../database/models')
-const product = db.Product
-const user = db.User
-const comentario = db.Comentario
+// const product = db.Product
+// const comentario = db.Comentario
+const users = db.User
 const op = db.Sequelize.Op
 const bcrypt = require('bcryptjs') 
 
 let controller = {
-    login: function (req, res){
-        res.render('login')
-    },
-    register: function (req, res){
-        res.render('register')
-    },
-    store: (req, res) => {
-        let user = {
-            nombre: req.body.nombre,
-            apellido: req.body.apellido,
-            email: req.body.email,
-            fecha: req.body.fecha,
-            password: bcrypt.hashSync(req.body.password, 10)
+    //LOGIN
+    login: (req, res)=>{
+        // Control de acceso
+        if(req.session.user != undefined){
+            return res.redirect('/')
+        } else {
+            return res.render('login')
         }
-        db.User.create(user)
-            .then(() => res.redirect('/users'))
-            .catch( error => console.log(error))    
-    },
+    }, 
     processLogin: (req, res) => {
+        // Variable para guardar errores
+        let errors = {};
+        
+        // Buscar el usuario por medio del mail
         db.User.findOne({
             where: [{ email: req.body.email }]
         })
-        .then(user => {
-            req.session.user = user
-            if(req.body.recordame){
-                res.cookie('user_id', user.id, {maxAge: 1000 * 60 * 10}) //chequear si es user.id
+        .then( (user) => {
+            if(user==null){
+               errors.login = "Email es incorrecto";
+               res.locals.error = errors;
+               return res.render('login') 
+            } else if (bcrypt.compareSync(req.body.password, user.password) == false){
+                errors.login = "Contraseña Incorrecta";
+                res.locals.errors = errors;
+               return res.render('login') 
+            } else {
+                req.session.user = user;
+                if(req.body.recordarme != undefined){
+                    res.cookie('user_id', user.id, {maxAge: 1000 * 60 * 5}); //chequear si es userId
+                }
             }
-            return res.redirect('/')
+            return res.redirect('/');
         })
-        .catch( error => console.log(error))
+        .catch( err => console.log(err))
     },
     logout: (req, res) => {
         req.session.destroy()
         res.clearCookie('user_id')
         return res.redirect('/')
     },
+
+    //REGISTER
+    register: (req, res)=>{
+        // Control de acceso
+        if(req.session.user != undefined){
+            return res.redirect('/')
+        } else {
+            return res.render('register')
+        }
+    }, 
+    store: (req, res) => {
+        console.log(req.body) //no me muestra nada por consola
+        let errors = {};
+        //chequear los campos obligatorios
+        
+       if(req.body.email == ""){ // El mail no debe esta vacio
+            errors.register = "Email no puede estar vacio"
+            res.locals.errors = errors
+
+            return res.render('register')
+
+       } else if (req.body.password == ""){ // El password no este vacio
+            errors.register = "Password no puede estar vacio"
+            res.locals.errors = errors
+
+            return res.render('register')
+       } else if(req.body.repassword == ""){
+            errors.register = "Re escribir password no puede estar vacio"
+            res.locals.errors = errors
+
+            return res.render('register')
+       } else {
+           users.findOne({where: [{ email : req.body.email}]})
+            .then( user => {
+                if(user !==null){
+                    errors.register = "Email ya existe"
+                    res.locals.errors = errors
+
+                    return res.render('register')
+                } else if(req.body.password != req.body.repassword ) {
+                    errors.register = "Los password no coinciden"
+                    res.locals.errors = errors
+
+                    return res.render('register')
+                } else {
+                    let user = {
+                        nombre: req.body.nombre,
+                        apellido: req.body.apellido,
+                        email: req.body.email,
+                        fecha: req.body.fecha,
+                        password: bcrypt.hashSync(req.body.password, 10)
+                    }
+                    users.create(user)
+                        .then( () => {
+                            return res.redirect('/users')
+                        })
+                        .catch( err => console.log(err))
+                }
+            })
+            .catch( err => console.log(err))
+        }  
+    },
+
+
 }
-
-
 
 module.exports = controller;

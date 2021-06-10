@@ -9,22 +9,22 @@
 				<h2 class="products-title">Ingresar</h2>
 			</div>
 			<!-- Show the "ultimos" products -->
-			<form class="row g-3" action="/profile" method="GET">
+			<form class="row g-3" action="/users" method="POST">
 				<div class="col-md-6">
 					<label for="inputEmail4" class="form-label">Email</label>
-					<input type="email" class="form-control" id="inputEmail4">
+					<input type="email" class="form-control" id="inputEmail4" name='email' placeholder="Escribe aqui tu email">
 				</div>
 				<div class="col-md-6">
 					<label for="inputPassword4" class="form-label">Contraseña</label>
-					<input type="password" class="form-control" id="inputPassword4">
-				</div>
-				<div class="col-12 button">
-				  <button type="submit" class="btn btn-primary">Ingresar</button>
+					<input type="password" class="form-control" id="inputPassword4" name='password' placeholder="Escribe aqui tu contraseña">
 				</div>
 				<div class="col-12 button">
 					<label for="">Recordame</label>
 					<input type="checkbox" name="recordame"> 
 					<!-- CHEQUEAR CSS -->
+				</div>
+				<div class="col-12 button">
+				  <button type="submit" class="btn btn-primary">Ingresar</button>
 				</div>
 			</form>		
 		</div>
