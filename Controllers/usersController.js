@@ -1,5 +1,7 @@
 const db = require('../database/models')
+const product = db.Product
 const user = db.User
+const comentario = db.Comentario
 const op = db.Sequelize.Op
 const bcrypt = require('bcryptjs') 
 

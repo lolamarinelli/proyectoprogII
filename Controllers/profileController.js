@@ -1,11 +1,16 @@
-let profile = require('../data/profile')
-let product = require("../data/product")
+const db = require('../database/models')
+const product = db.Product
+const user = db.User
+const comentario = db.Comentario
+const op = db.Sequelize.Op
+const bcrypt = require('bcryptjs') 
+
 let controller = {
     index: function (req, res){
-        res.render('profile', {'profile': profile, product})
+        res.render('profile', {user, product})
     },
     show: function (req, res){
-        res.render('profile-edit', {'profile': profile})
+        res.render('profile-edit', {user})
     }
 }
 
