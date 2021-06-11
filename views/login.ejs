@@ -8,6 +8,9 @@
 			<div class="col-12">
 				<h2 class="products-title">Ingresar</h2>
 			</div>
+			<% if(locals.errors){ %>
+				<p class="products-title" > <%= errors.login %><p>
+			<% } %>
 			<!-- Show the "ultimos" products -->
 			<form class="row g-3" action="/users" method="POST">
 				<div class="col-md-6">

@@ -1,11 +1,5 @@
 	<!-- Header -->
-	<%if (usuarioLogueado =! null ) { %>
-		<%- include('partials/headerLogueado.ejs') %>
-		<% }else { %>
-			<%- include('partials/header.ejs') %>
-		<%}%>
-	
-
+	<%- include('partials/header.ejs') %>
 	<!-- /Header -->
 	
 	<!-- Banner -->
@@ -24,14 +18,14 @@
 			<% for(let i=0; i < 4; i++) { %>
 				<div class="col-12 col-sm-6 col-lg-3">
 					<section class="product-box">
-						<a href="/product/">
+						<a href="/product/<%= resultados[i].id %>">
 							<figure class="product-box_image">
-								<img src="" alt="Jordans">
+								<img src="<%= resultados[i].image %>" alt="Jordans">
 							</figure>
 							<article class="product-box_data">
-								<h2>  </h2>
-								<p>  </p>
-								<p> Comentarios:  </p>
+								<h2> <%= resultados[i].modelo %> </h2>
+								<p> <%= resultados[i].descripcion %> </p>
+								<p> Comentarios: <%= resultados[i].comentarios %>  </p>
 							</article> 
 						</a>
 					</section>
@@ -50,14 +44,14 @@
 			<% for(let i=4; i < 8; i++) { %>
 				<div class="col-12 col-sm-6 col-lg-3">
 					<section class="product-box">
-						<a href="/product/">
+						<a href="/product/<%= resultados[i].id %>">
 							<figure class="product-box_image">
-								<img src="" alt="Jordans">
+								<img src="<%= resultados[i].image %>" alt="Jordans">
 							</figure>
 							<article class="product-box_data">
-								<h2>  </h2>
-								<p> </p>
-								<p> Comentarios:  </p>
+								<h2> <%= resultados[i].modelo %> </h2>
+								<p> <%= resultados[i].descripcion %> </p>
+								<p> Comentarios: <%= resultados[i].comentarios %> </p>
 							</article> 
 						</a>
 					</section>

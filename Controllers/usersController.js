@@ -18,7 +18,7 @@ let controller = {
     processLogin: (req, res) => {
         // Variable para guardar errores
         let errors = {};
-        
+
         // Buscar el usuario por medio del mail
         db.User.findOne({
             where: [{ email: req.body.email }]

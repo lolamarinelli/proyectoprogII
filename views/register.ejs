@@ -8,6 +8,9 @@
 			<div class="col-12">
 				<h2 class="products-title">Registrate</h2>
 			</div>
+			<% if(locals.errors){ %>
+				<p class="products-title" > <%= errors.register %><p>
+			<% } %>
 			<!-- Show the "ultimos" products -->
 			<form class="row g-3" action="/users/register" method="POST">
 				<div class="col-12">
