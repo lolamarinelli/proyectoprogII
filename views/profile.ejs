@@ -1,5 +1,9 @@
 	<!-- Header -->
-	<%- include('partials/headerLogueado.ejs') %>
+	<% if(user=! null){ %> 
+		<%- include('partials/headerLogueado.ejs') %> 
+	<% } else { %>
+		<%- include('partials/header.ejs') %>
+	<% } %>
 	<!-- /Header -->
 
 	<!-- Datos del usuario -->
@@ -36,17 +40,17 @@
 				<h2 class="products-title">Mis productos</h2>
 			</div>
 			<!-- Show mis productos -->
-			<% for(let i=0; i < product.length; i++) { %>
+			<% for(let i=0; i < resultados.length; i++) { %>
 				<div class="col-12 col-sm-6 col-lg-3">
 					<section class="product-box">
-						<a href="/product/">
+						<a href="/product/<%= resultados[i].id %> ">
 							<figure class="product-box_image">
-								<img src="" alt="Jordans">
+								<img src="<%= resultados[i].image %> " alt="Jordans">
 							</figure>
 							<article class="product-box_data">
-								<h2> </h2>
-								<p>  </p>
-								<p> Comentarios: </p>
+								<h2> <%= resultados[i].modelo %> </h2>
+								<p> <%= resultados[i].descripcion %>  </p>
+								<p> Comentarios:<%= resultados[i].comentarios %>  </p>
 							</article> 
 						</a>
 					</section>

@@ -6,12 +6,23 @@ const op = db.Sequelize.Op
 const bcrypt = require('bcryptjs') 
 
 let controller = {
-    index: function (req, res){
+    /* index: function (req, res){
         res.render('profile', {user, product})
     },
     show: function (req, res){
         res.render('profile-edit', {user})
+    }, */
+    product: (req, res)=>{
+        product.findAll()
+            .then((resultados)=> res.render('profile', { resultados }))
+            .catch((err)=> `Error: ${err}`)
+    },
+    user: (req, res)=>{
+        user.findAll()
+            .then((resultados_user)=> res.render('profile', { resultados_user }))
+            .catch((err)=> `Error: ${err}`)
     }
+
 }
 
 module.exports = controller;

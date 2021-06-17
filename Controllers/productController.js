@@ -6,7 +6,7 @@ const op = db.Sequelize.Op
 const bcrypt = require('bcryptjs') 
 
 let controller = {
-  product: function (req, res){
+  /* product: function (req, res){
         res.render('product', {product, user, comentario})
     },
     add: function (req, res){
@@ -14,7 +14,12 @@ let controller = {
     },
     results: function (req, res){
         res.render('search-results', {product, user, comentario})
-    }, 
+    }, */ 
+    index: (req, res)=>{
+        product.findAll()
+            .then((resultados)=> res.render('profile', { resultados }))
+            .catch((err)=> `Error: ${err}`)
+    },
     id: function(req, res){
        let ids = req.params.id
         let resultado = {};

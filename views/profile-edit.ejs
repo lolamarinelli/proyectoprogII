@@ -1,5 +1,9 @@
 	<!-- Header -->
-	<%- include('partials/headerLogueado.ejs') %>
+	<% if(user=! null){ %> 
+		<%- include('partials/headerLogueado.ejs') %> 
+	<% } else { %>
+		<%- include('partials/header.ejs') %>
+	<% } %>
 	<!-- /Header -->
 
 	<!-- Novedades -->
