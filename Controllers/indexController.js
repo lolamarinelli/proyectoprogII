@@ -11,7 +11,17 @@ let controller = {
             .then((resultados)=> res.render('index', { resultados }))
             .catch((err)=> `Error: ${err}`)
     },
+    search: (req, res)=>{
+        let searchData = req.query.search;
+        product.findAll({
+            where: [
+                { modelo: {[op.like]: `%${searchData}%`}}
+            ]
+        })
+            .then(resultados => res.render('search-results', { resultados }))
+            .catch(err=> console.log(err))
         
+    },
 }
 
 module.exports = controller;

@@ -6,19 +6,13 @@ const op = db.Sequelize.Op
 const bcrypt = require('bcryptjs') 
 
 let controller = {
-  /* product: function (req, res){
-        res.render('product', {product, user, comentario})
-    },
-    add: function (req, res){
-        res.render('product-add', {product, user, comentario})
-    },
-    results: function (req, res){
-        res.render('search-results', {product, user, comentario})
-    }, */ 
-    index: (req, res)=>{
-        product.findAll()
-            .then((resultados)=> res.render('profile', { resultados }))
-            .catch((err)=> `Error: ${err}`)
+    show: (req, res)=>{
+        let primaryKey = req.params.id;
+        product.findByPk(primaryKey, {
+            include: [{association: 'comentario'}]
+        })
+            .then(resultados => res.render('product', {resultados}))
+            .catch( err => console.log(err))
     },
     id: function(req, res){
        let ids = req.params.id
@@ -28,29 +22,18 @@ let controller = {
                 resultado = product[i];
             }            
         }
-       res.render("product", {product, user, comentarios})
-    },
-    /* search: (req, res)=>{
-        let searchDatad = req.query.search;
-        product.findAll({
-            where: [
-                { title: {[op.like]: `%${searchDatad}%`}}
-            ]
-        })
-            .then(resultados => res.render('search-results', { resultados }))
-            .catch(err=> console.log(err))
-        
+    //    res.render("product", {product, user, comentarios})
     },
     add: (req, res)=>{
         return res.render('product-add')
     },
     store: (req, res)=>{
-        
         let product = {
             modelo: req.body.modelo,
             descripcion: req.body.descripcion,
             image: req.body.image,
-       
+            // comentarios: req.body.comentarios, //no se si va
+            // fecha: req.body.fecha, //no se si va
         } 
 
         db.Product.create(product)
@@ -58,27 +41,27 @@ let controller = {
             .then(() => res.redirect('/profile'))
             .catch(err => console.log(err))
     },
-    borrar: (req, res)=>{
-        let primaryKey = req.params.id;
-        product.destroy({
-            where: {
-                id: primaryKey
-            }
-        })
-        .then(()=> res.redirect('/profile'))
-        .catch(err=> console.log(err))
-    },
-    destroy: (req, res)=>{
-        let primaryKey = req.params.id;
-        //console.log(primaryKey);
-         product.destroy({
-            where: {
-                id: primaryKey
-            }
-        })
-        .then(()=> res.redirect('/profile'))
-        .catch(err=> console.log(err))
-    }, */
+    // borrar: (req, res)=>{
+    //     let primaryKey = req.params.id;
+    //     product.destroy({
+    //         where: {
+    //             id: primaryKey
+    //         }
+    //     })
+    //     .then(()=> res.redirect('/profile'))
+    //     .catch(err=> console.log(err))
+    // },
+    // destroy: (req, res)=>{
+    //     let primaryKey = req.params.id;
+    //     //console.log(primaryKey);
+    //      product.destroy({
+    //         where: {
+    //             id: primaryKey
+    //         }
+    //     })
+    //     .then(()=> res.redirect('/profile'))
+    //     .catch(err=> console.log(err))
+    // }, 
 }
 
 module.exports = controller;

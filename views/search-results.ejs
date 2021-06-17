@@ -8,24 +8,41 @@
 
 	<!-- Novedades -->
 	<div class="container products-wrapper">
-		<div class="row">
-			<div class="col-12">
-				<h2 class="products-title">Resultados de búsqueda</h2>
-			</div>
-			<!-- Show the "ultimos" products -->
-			<h2 class="col-12"> <ul>
-				<% for(let i=0; i<resultados.length; i+=1){ %>
-					<li>
-						<a href="/movies/detalle/<%= resultados[i].id %>">
-						<%= resultados[i].modelo %>
-					</a> 
-					</li>
-				<% } %>
-			</ul>
-			</h2>
+		<% for(let i=0; i< resultados.length; i+=1){ %>
+		<div class="d-flex align-items-center">
+			<h2 class="products-title"><%= resultados[i].modelo %></h2> 
+			<p class="product-detail-description">
+				<a href="/product/product-add">Editar</a>
+			</p>
 		</div>
+		<div class="product-detail">
+			<div class="row">
+				<article class="col-12 col-lg-8 product-detail-info">
+					<img src="<%= resultados[i].image %>" alt="" class="product-detail-img">
+					<p class="product-detail-description"> <%= resultados[i].descripcion %> </p>
+				</article>
+				<div class="col-12 col-lg-4">
+					<section class="comments">
+						<% for(let i=0; i < resultados.length; i++) { %>
+							<article>
+							<img src="<%= resultados[i].image %>" alt="">
+								<div class="data">
+									<p class="user">
+									<strong> <a href="/profile"> : </a> </strong>
+									</p>
+								</div>
+							</article>
+						<% } %>
+					</section>
+					<form class="form" action="" method="POST">
+						<input class="form-input" type="text" value="" placeholder="Agregar comentario">
+						<button type="submit" class="buy-now-button">AGREGAR COMENTARIO</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		<% } %>
 	</div>
-
 	<!-- footer -->
 	<%- include('partials/footer.ejs') %>
 </body>

@@ -48,7 +48,7 @@ let controller = {
     logout: (req, res) => {
         req.session.destroy()
         res.clearCookie('user_id')
-        return res.redirect('/')
+        return res.redirect('/users')
     },
 
     //REGISTER

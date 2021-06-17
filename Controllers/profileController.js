@@ -17,11 +17,7 @@ let controller = {
             .then((resultados)=> res.render('profile', { resultados }))
             .catch((err)=> `Error: ${err}`)
     },
-    user: (req, res)=>{
-        user.findAll()
-            .then((resultados_user)=> res.render('profile', { resultados_user }))
-            .catch((err)=> `Error: ${err}`)
-    }
+    
 
 }
 
