@@ -24,9 +24,6 @@ module.exports = (sequelize, dataTypes)=>{
         },
         fecha :{
             type: dataTypes.DATE
-        },
-        productos :{
-            type: dataTypes.STRING
         }, 
         seguidores :{
             type: dataTypes.INTEGER

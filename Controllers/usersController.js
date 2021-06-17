@@ -61,7 +61,7 @@ let controller = {
         }
     }, 
     store: (req, res) => {
-        console.log(req.body) //no me muestra nada por consola
+        console.log(req.body) 
         let errors = {};
         //chequear los campos obligatorios
         
@@ -111,7 +111,11 @@ let controller = {
                         .catch( err => console.log(err))
                 }
             })
-            .catch( err => console.log(err)) 
+            .catch( err => {
+            console.log(err)
+            res.send(err)
+        }) 
+
         }  
     },
 

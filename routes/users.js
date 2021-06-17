@@ -9,7 +9,7 @@ var storage = multer.diskStorage({
       cb(null, 'public/images/avatar') // en donde vamos a guardar nuestras imagenes
     },
     filename: function (req, file, cb) {
-      cb(null, file.fieldname + '-' + Date.now() + path.extname(file.or))
+      cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
     }
   })
    
@@ -18,11 +18,8 @@ var storage = multer.diskStorage({
 router.get('/', usersController.login)
 router.post('/', usersController.processLogin)
 router.get('/register', usersController.register)
-router.post('/register', usersController.store)
-router.post('/', upload.single("avatar"),usersController.store); // guardar el usuarios
-
-// router.post('/logout', usersController.logout) NO FUNCIONA LOGOUT
-
+router.post('/register', upload.single("avatar"),usersController.store); // guardar el usuarios
+router.post('/logout', usersController.logout) 
 
 
 module.exports = router;
