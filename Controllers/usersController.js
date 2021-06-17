@@ -24,9 +24,12 @@ let controller = {
             where: [{ email: req.body.email }]
         })
         .then( (user) => {
+        
+
             if(user==null){
+                console.log("hola")
                errors.login = "Email es incorrecto";
-               res.locals.error = errors;
+               res.locals.errors = errors;
                return res.render('login') 
             } else if (bcrypt.compareSync(req.body.password, user.password) == false){
                 errors.login = "Contraseña Incorrecta";
@@ -97,7 +100,9 @@ let controller = {
                         apellido: req.body.apellido,
                         email: req.body.email,
                         fecha: req.body.fecha,
-                        password: bcrypt.hashSync(req.body.password, 10)
+                        password: bcrypt.hashSync(req.body.password, 10),
+                        image: req.file.filename
+        
                     }
                     users.create(user)
                         .then( () => {
@@ -106,7 +111,7 @@ let controller = {
                         .catch( err => console.log(err))
                 }
             })
-            .catch( err => console.log(err))
+            .catch( err => console.log(err)) 
         }  
     },
 

@@ -11,6 +11,7 @@ let controller = {
             .then((resultados)=> res.render('index', { resultados }))
             .catch((err)=> `Error: ${err}`)
     },
+        
 }
 
 module.exports = controller;

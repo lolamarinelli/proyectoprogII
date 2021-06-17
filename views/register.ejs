@@ -12,7 +12,7 @@
 				<p class="products-title" > <%= errors.register %><p>
 			<% } %>
 			<!-- Show the "ultimos" products -->
-			<form class="row g-3" action="/users/register" method="POST">
+			<form class="row g-3" action="/users/register" method="POST" enctype="multipart/form-data"> <!-- El formulario debe tener enctype si tiene para subir algun archivo -->
 				<div class="col-12">
 				  	<label for="inputAddress" class="form-label">Nombre</label>
 				  	<input type="text" class="form-control" id="nombre" name="nombre" placeholder="Escribe aquí tu nombre">
@@ -36,6 +36,9 @@
 				<div class="col-md-6">
 					<label for="inputPassword4" class="form-label">Ingrese nuevamente su contraseña</label>
 					<input type="password" class="form-control" id="inputPassword" name="repassword">
+				</div>
+				<div class="col-md-6">
+					<input type="file" name="avatar" id="">	
 				</div>
 				<div class="col-12">
 					<button type="submit" class="btn btn-primary">Registrate</button>
