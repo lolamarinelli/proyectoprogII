@@ -20,6 +20,8 @@ router.post('/', usersController.processLogin)
 router.get('/register', usersController.register)
 router.post('/register', upload.single("avatar"),usersController.store); // guardar el usuarios
 router.post('/logout', usersController.logout) 
+router.get('/profile', usersController.profile) 
+
 
 
 module.exports = router;

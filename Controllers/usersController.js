@@ -1,5 +1,5 @@
 const db = require('../database/models')
-// const product = db.Product
+const product = db.Product
 // const comentario = db.Comentario
 const users = db.User
 const op = db.Sequelize.Op
@@ -24,8 +24,6 @@ let controller = {
             where: [{ email: req.body.email }]
         })
         .then( (user) => {
-        
-
             if(user==null){
                 console.log("hola")
                errors.login = "Email es incorrecto";
@@ -105,7 +103,7 @@ let controller = {
         
                     }
                     users.create(user)
-                        .then( () => {
+                        .then( (user) => {
                             return res.redirect('/users')
                         })
                         .catch( err => console.log(err))
@@ -113,12 +111,16 @@ let controller = {
             })
             .catch( err => {
             console.log(err)
-            res.send(err)
-        }) 
-
+            res.send(err)}) 
         }  
     },
 
+    //PROFILE
+    profile: (req, res)=>{
+        product.findAll()
+            .then((resultados)=> res.render('profile', { resultados }))
+            .catch((err)=> `Error: ${err}`)
+    },
 
 }
 

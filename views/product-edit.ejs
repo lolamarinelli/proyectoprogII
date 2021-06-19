@@ -1,0 +1,33 @@
+<!-- Header -->
+<%- include('partials/headerLogueado.ejs') %> 
+<!-- /Header -->
+
+<!-- Novedades -->
+<div class="container products-wrapper">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="products-title">Editando el producto <%= resultados.modelo %></h2>
+        </div>
+        <!-- Show the "ultimos" products -->
+        <form action="/product/product-edit/<%= resultados.id %>" class="row g-3" method="POST" enctype="multipart/form-data">
+            <div class="col-12">
+                  <label for="inputAddress" class="form-label">Modelo</label>
+                  <input type="text" value="<%= resultados.modelo %>" class="form-control modelo" name="modelo" id="modelo" placeholder="Escribe aquí el modelo ">
+            </div>
+            <div class="col-md-6">
+                <label for="inputPassword4" class="form-label">Descripción</label>
+                <input type="text" value="<%= resultados.descripcion %>" name="descripcion" class="form-control descrip" name="descripcion" id="descripcion" cols="30" rows="5">
+            </div>
+            <div class="col-md-6">
+                <label for="inputEmail4" class="form-label">Imagen</label>
+                <input type="file" value="<%= resultados.image %>" class="form-control img-form" name="image" id="image"  alt="submit">	
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Actualizar Producto</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- footer -->
+<%- include('partials/footer.ejs') %>

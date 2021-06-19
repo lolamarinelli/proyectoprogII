@@ -8,7 +8,6 @@ const session = require('express-session')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var profileRouter = require('./routes/profile');
 var productRouter = require('./routes/product');
 
 
@@ -52,7 +51,6 @@ app.use((req, res, next) => {
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/profile', profileRouter);
 app.use('/product', productRouter);
 
 

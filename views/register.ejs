@@ -1,9 +1,5 @@
 	<!-- Header -->
-	<% if(user=! null){ %> 
-		<%- include('partials/headerLogueado.ejs') %> 
-	<% } else { %>
 		<%- include('partials/header.ejs') %>
-	<% } %>
 	<!-- /Header -->
 
 	<!-- Novedades -->
@@ -42,7 +38,8 @@
 					<input type="password" class="form-control" id="inputPassword" name="repassword">
 				</div>
 				<div class="col-md-6">
-					<input type="file" name="avatar" id="">	
+					<label for="inputEmail4" class="form-label">Imagen de perfil</label>
+					<input type="file" class="form-control img-form" name="avatar" id="avatar"  alt="submit">	
 				</div>
 				<div class="col-12">
 					<button type="submit" class="btn btn-primary">Registrate</button>

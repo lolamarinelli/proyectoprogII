@@ -11,7 +11,10 @@
 		<div class="d-flex align-items-center">
 			<h2 class="products-title"> <%= resultados.modelo %></h2> 
 			<p class="product-detail-description">
-				<a href="/product/product-add">Editar</a>
+				<a href="/product/product-edit/<%= resultados.id %>">Editar</a>
+				<form style="display: inline;" action="/product/<%=resultados.id %>" method="POST">
+					<button class="btn btn-danger" type="submit">Borrar</button>
+				</form>
 			</p>
 		</div>
 		<div class="product-detail">
