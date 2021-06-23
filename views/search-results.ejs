@@ -1,50 +1,38 @@
-	<!-- Header -->
-	<% if(user=! null){ %> 
-		<%- include('partials/headerLogueado.ejs') %> 
-	<% } else { %>
-		<%- include('partials/header.ejs') %>
-	<% } %>
-	<!-- /Header -->
+<!-- Header -->
+<% if(user=! null){ %> 
+	<%- include('partials/headerLogueado.ejs') %> 
+<% } else { %>
+	<%- include('partials/header.ejs') %>
+<% } %>
+<!-- /Header -->
 
-	<!-- Novedades -->
-	<div class="container products-wrapper">
-		<% for(let i=0; i< resultados.length; i+=1){ %>
-		<div class="d-flex align-items-center">
-			<h2 class="products-title"><%= resultados[i].modelo %></h2> 
-			<p class="product-detail-description">
-				<a href="/product/product-add">Editar</a>
-			</p>
+<!-- Resultados -->
+<div class="container products-wrapper">
+	<div class="row">
+		<div class="col-12">
+			<h2 class="products-title">Resultados de busqueda</h2>
 		</div>
-		<div class="product-detail">
-			<div class="row">
-				<article class="col-12 col-lg-8 product-detail-info">
-					<img src="<%= resultados[i].image %>" alt="" class="product-detail-img">
-					<p class="product-detail-description"> <%= resultados[i].descripcion %> </p>
-				</article>
-				<div class="col-12 col-lg-4">
-					<section class="comments">
-						<% for(let i=0; i < resultados.length; i++) { %>
-							<article>
-							<img src="<%= resultados[i].image %>" alt="">
-								<div class="data">
-									<p class="user">
-									<strong> <a href="/profile"> : </a> </strong>
-									</p>
-								</div>
-							</article>
-						<% } %>
-					</section>
-					<form class="form" action="" method="POST">
-						<input class="form-input" type="text" value="" placeholder="Agregar comentario">
-						<button type="submit" class="buy-now-button">AGREGAR COMENTARIO</button>
-					</form>
-				</div>
+		<% for(let i=0; i < resultados.length; i++) { %>
+			<div class="col-12 col-sm-6 col-lg-3">
+				<section class="product-box">
+					<a href="/product/<%= resultados[i].id %> ">
+						<figure class="product-box_image">
+							<img src="<%= resultados[i].image %> " alt="Jordans">
+						</figure>
+						<article class="product-box_data">
+							<h2> <%= resultados[i].modelo %> </h2>
+							<p> <%= resultados[i].descripcion %>  </p>
+							<p> Comentarios:<%= resultados[i].comentarios %>  </p>
+						</article> 
+					</a>
+				</section>
 			</div>
-		</div>
 		<% } %>
 	</div>
-	<!-- footer -->
-	<%- include('partials/footer.ejs') %>
+</div>
+
+<!-- footer -->
+<%- include('partials/footer.ejs') %>
 </body>
 
 </html>
