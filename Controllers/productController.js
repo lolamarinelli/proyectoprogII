@@ -6,16 +6,24 @@ const op = db.Sequelize.Op
 const bcrypt = require('bcryptjs') 
 
 let controller = {
+    // index: (req, res)=>{
+    //     res.render('index', {'producto':producto})
+    // },
     show: (req, res)=>{
         let primaryKey = req.params.id;
         product.findByPk(primaryKey, {
-            include: [{association: 'comentario'}]
+            include: [{association: 'comentario'}, {association: 'user'}]
         })
             .then(resultados => res.render('product', {resultados}))
             .catch( err => console.log(err))
     },
     add: (req, res)=>{
-        return res.render('product-add')
+        product.findByPk(primaryKey, {
+            include: [{association: 'comentario'}, {association: 'user'}]
+        })
+            .then(resultados => res.render('product-add', {resultados}))
+            .catch( err => console.log(err))
+        // return res.render('product-add')
     },
     store: (req, res)=>{
         let product = {
@@ -24,12 +32,14 @@ let controller = {
             image: req.file.filename
         } 
         db.Product.create(product)
-            .then(() => res.redirect('/profile'))
+            .then(() => res.redirect('/users/profile'))
             .catch(err => console.log(err))
     },
     edit: (req, res)=>{
         let primaryKey = req.params.id;
-        product.findByPk(primaryKey)
+        product.findByPk(primaryKey,  {
+            include: [{association: 'comentario'}, {association: 'user'}]
+        })
             .then(resultados => res.render('product-edit', { resultados }))
             .catch(err => console.log(err))
     }, 
@@ -44,7 +54,7 @@ let controller = {
                 }
             }
         )
-            .then(()=> res.redirect('/profile'))
+            .then(()=> res.redirect('/users/profile'))
             .catch(err => console.log(err))
     },
     borrar: (req, res)=>{
@@ -54,7 +64,7 @@ let controller = {
                 id: primaryKey
             }
         })
-            .then(()=> res.redirect('/profile'))
+            .then(()=> res.redirect('/users/profile'))
             .catch(err=> console.log(err))
     },
     destroy: (req, res)=>{
@@ -64,7 +74,7 @@ let controller = {
                 id: primaryKey
             }
         })
-            .then(()=> res.redirect('/profile'))
+            .then(()=> res.redirect('/users/profile'))
             .catch(err=> console.log(err))
     },
 }

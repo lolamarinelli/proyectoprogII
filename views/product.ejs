@@ -22,6 +22,7 @@
 				<article class="col-12 col-lg-8 product-detail-info">
 					<img src="<%= resultados.image %>" alt="" class="product-detail-img">
 					<p class="product-detail-description"> <%= resultados.descripcion %> </p>
+
 				</article>
 				<div class="col-12 col-lg-4">
 					<section class="comments">
@@ -30,7 +31,7 @@
 							<img src="" alt="">
 								<div class="data">
 									<p class="user">
-									<strong> <a href="/profile"> : <%= resultados.comentario[i].comentario %> </a> </strong>
+									<strong> <a href="/users/profile">  : <%= resultados.comentario[i].comentario %> </a> </strong>
 									</p>
 								</div>
 							</article>

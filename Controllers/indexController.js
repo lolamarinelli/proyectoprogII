@@ -7,10 +7,14 @@ const bcrypt = require('bcryptjs')
 
 let controller = {
     index: (req, res)=>{
-        product.findAll()
+        product.findAll({
+            include: [{association: 'comentario'}, {association: 'user'}],
+            order: [[`created_at`, `DESC`]]
+        })
             .then((resultados)=> res.render('index', { resultados }))
             .catch((err)=> `Error: ${err}`)
     },
+    
     search: (req, res)=>{
         let searchData = req.query.search;
         product.findAll({

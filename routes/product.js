@@ -19,7 +19,7 @@ router.get('/:id', productController.show)
 router.get('/product-add', productController.add)
 router.post('/product-add', upload.single("image"),productController.store); // guardar el usuarios
 router.get('/product-edit/:id', productController.edit)
-router.post('/product-edit/:id', productController.update)
+router.post('/product-edit/:id', upload.single("image"),productController.update); 
 router.get('/borrar/:id', productController.borrar)
 router.post('/:id', productController.destroy)
 

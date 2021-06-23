@@ -19,6 +19,9 @@ module.exports = (sequelize, dataTypes)=>{
         password: {
             type: dataTypes.STRING 
         },
+        repassword: {
+            type: dataTypes.STRING 
+        },
         image :{
             type: dataTypes.STRING
         },
@@ -28,14 +31,18 @@ module.exports = (sequelize, dataTypes)=>{
         seguidores :{
             type: dataTypes.INTEGER
         },
-        comentarios :{
-            type: dataTypes.INTEGER
+        created_at: {
+            type: dataTypes.DATE,
+            allowNull: true,
         },
-
+        updated_at: {
+            type: dataTypes.DATE,
+            allowNull: true,
+        },
     };
     let config = {
         tableName: "users",
-        timestamps: true,
+        timestamps: false,
         underscored: true
     }
 
@@ -44,11 +51,11 @@ module.exports = (sequelize, dataTypes)=>{
         // Relacion
         User.hasMany(models.Comentario, {
          as: 'comentario', 
-         foreignKey: 'users_id'
+         foreignKey: 'user_id'
      })
      User.hasMany(models.Product, {
         as: 'product', 
-        foreignKey: 'users_id'
+        foreignKey: 'user_id'
     }) 
     }
 

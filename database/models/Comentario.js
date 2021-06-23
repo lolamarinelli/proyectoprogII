@@ -10,17 +10,14 @@ module.exports = (sequelize, dataTypes)=>{
         comentario: {
             type: dataTypes.STRING 
         },
-        fecha :{
-            type: dataTypes.DATE
-        },
         // chequear Foreign Keys
         product_id: {
             type: dataTypes.INTEGER
         },
-        users_id: {
+        user_id: {
             type: dataTypes.INTEGER
         },
-      created_at: {
+        created_at: {
             type: dataTypes.DATE,
             allowNull: true,
         },
@@ -43,7 +40,7 @@ module.exports = (sequelize, dataTypes)=>{
        })
        Comentario.belongsTo(models.User,{
            as: "users",
-           foreignKey: "users_id"
+           foreignKey: "user_id"
        })
 
    }

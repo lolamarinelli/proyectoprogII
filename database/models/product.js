@@ -16,9 +16,6 @@ module.exports = (sequelize, dataTypes)=>{
         descripcion: {
             type: dataTypes.STRING
         },
-        comentarios: {
-            type: dataTypes.STRING 
-        },
         fecha :{
             type: dataTypes.DATE
         },
@@ -30,6 +27,10 @@ module.exports = (sequelize, dataTypes)=>{
             type: dataTypes.DATE,
             allowNull: true,
         },
+        user_id: {
+            type: dataTypes.DATE,
+            allowNull: true,
+        }
     };
 
    let config = {
@@ -46,7 +47,7 @@ module.exports = (sequelize, dataTypes)=>{
     })
     Product.belongsTo(models.User, {
         as: 'user', 
-        foreignKey: 'users_id'
+        foreignKey: 'user_id'
     })
    }
     return Product;

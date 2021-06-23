@@ -26,11 +26,11 @@ let controller = {
         .then( (user) => {
             if(user==null){
                 console.log("hola")
-               errors.login = "Email es incorrecto";
+               errors.login = "Email o la contraseña son incorrectos";
                res.locals.errors = errors;
                return res.render('login') 
             } else if (bcrypt.compareSync(req.body.password, user.password) == false){
-                errors.login = "Contraseña Incorrecta";
+                errors.login = "Email o la contraseña son incorrectos";
                 res.locals.errors = errors;
                return res.render('login') 
             } else {
@@ -93,21 +93,25 @@ let controller = {
 
                     return res.render('register')
                 } else {
+                    console.log('Crea el usuario')
                     let user = {
                         nombre: req.body.nombre,
                         apellido: req.body.apellido,
                         email: req.body.email,
                         fecha: req.body.fecha,
+                        // profile_photo: 'default.png',
                         password: bcrypt.hashSync(req.body.password, 10),
+                        repassword: bcrypt.hashSync(req.body.password, 10),
                         image: req.file.filename
         
                     }
                     users.create(user)
-                        .then( (user) => {
+                        .then( user => {
                             return res.redirect('/users')
                         })
                         .catch( err => console.log(err))
                 }
+                console.log('llego al final')
             })
             .catch( err => {
             console.log(err)
@@ -117,6 +121,12 @@ let controller = {
 
     //PROFILE
     profile: (req, res)=>{
+    //     let user_id = req.params.id
+    //     product.findAll({
+    //         where:[{user_id: {[op.like]:`${user_id}`}}]
+    // })
+    //         .then((resultados)=> res.render('profile', { resultados }))
+    //         .catch((err)=> `Error: ${err}`)
         product.findAll()
             .then((resultados)=> res.render('profile', { resultados }))
             .catch((err)=> `Error: ${err}`)
