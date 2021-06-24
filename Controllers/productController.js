@@ -1,7 +1,5 @@
 const db = require('../database/models')
 const product = db.Product
-const user = db.User
-const comentarios = db.Comentario
 const op = db.Sequelize.Op
 const bcrypt = require('bcryptjs') 
 
@@ -9,16 +7,17 @@ let controller = {
     show: (req, res)=>{
         let primaryKey = req.params.id;
         product.findByPk(primaryKey, {
-            include: [{association: 'comentario', include:[{association: 'user'}]}, {association: 'user'}]
+            include: [{association: 'user', include:[{association: 'comentario'}]}]
         })
-            .then(product => res.render('product', {product}))
+     .then(product => res.render('product', {product}))  
+          /* .then(product=>res.send(product))  */
             .catch( err => console.log(err))
     },
     add: (req, res)=>{
         product.findAll({
-            include: [{association: 'comentario'}, {association: 'user'}]
+            include: [{association: 'user'}, {association: 'comentario'}]
         })
-            .then(product => res.render('product-add', {product}))
+            .then(product => res.render('product-add', {product})) 
             .catch( err => console.log(err))
         // return res.render('product-add')
     },
@@ -36,8 +35,9 @@ let controller = {
             let product = {
                 modelo: req.body.modelo,
                 descripcion: req.body.descripcion,
-                image: req.file.filename,
-                // user_id: res.locals.user.id
+                image: `/images/products/${req.file.filename}`,
+                user_id: req.session.user.id
+                
             } 
             db.Product.create(product)
                 .then(() => res.redirect('/'))

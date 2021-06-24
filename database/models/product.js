@@ -16,9 +16,9 @@ module.exports = (sequelize, dataTypes)=>{
         descripcion: {
             type: dataTypes.STRING
         },
-        fecha :{
+        /* fecha :{
             type: dataTypes.DATE
-        },
+        }, */
         created_at: {
             type: dataTypes.DATE,
             allowNull: true,
@@ -28,27 +28,28 @@ module.exports = (sequelize, dataTypes)=>{
             allowNull: true,
         },
         user_id: {
-            type: dataTypes.DATE,
+            type: dataTypes.INTEGER,
             allowNull: true,
         }
     };
 
    let config = {
        tableName: "product",
-       timestamps: false,
+       timestamps: true,
        underscored: true,
    }
    const Product = sequelize.define(alias, cols, config)
    Product.associate = (models) => {
        // Relacion
+       Product.belongsTo(models.User, {
+        as: 'user', 
+        foreignKey: 'user_id'
+    })
        Product.hasMany(models.Comentario, {
         as: 'comentario', 
         foreignKey: 'product_id'
     })
-    Product.belongsTo(models.User, {
-        as: 'user', 
-        foreignKey: 'user_id'
-    })
+    
    }
     return Product;
     

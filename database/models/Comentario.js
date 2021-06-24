@@ -34,14 +34,15 @@ module.exports = (sequelize, dataTypes)=>{
    }
    const Comentario = sequelize.define(alias, cols, config)
    Comentario.associate = (models) => {
+    Comentario.belongsTo(models.User,{
+        as: "user",
+        foreignKey: "user_id"
+    })
        Comentario.belongsTo(models.Product, {
            as: "product",
            foreignKey: "product_id"
        })
-       Comentario.belongsTo(models.User,{
-           as: "user",
-           foreignKey: "user_id"
-       })
+       
 
    }
 
