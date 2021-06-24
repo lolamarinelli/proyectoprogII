@@ -9,18 +9,18 @@ let controller = {
     show: (req, res)=>{
         let primaryKey = req.params.id;
         product.findByPk(primaryKey, {
-            include: [{association: 'comentario'}, {association: 'user'}]
+            include: [{association: 'comentario', include:[{association: 'user'}]}, {association: 'user'}]
         })
             .then(product => res.render('product', {product}))
             .catch( err => console.log(err))
     },
     add: (req, res)=>{
-        // product.findAll({
-        //     include: [{association: 'comentario'}, {association: 'user'}]
-        // })
-        //     .then(product => res.render('product-add', {product}))
-        //     .catch( err => console.log(err))
-        return res.render('product-add')
+        product.findAll({
+            include: [{association: 'comentario'}, {association: 'user'}]
+        })
+            .then(product => res.render('product-add', {product}))
+            .catch( err => console.log(err))
+        // return res.render('product-add')
     },
     store: (req, res)=>{
         let errors = {}

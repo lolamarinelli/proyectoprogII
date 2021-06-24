@@ -39,7 +39,7 @@ module.exports = (sequelize, dataTypes)=>{
            foreignKey: "product_id"
        })
        Comentario.belongsTo(models.User,{
-           as: "users",
+           as: "user",
            foreignKey: "user_id"
        })
 

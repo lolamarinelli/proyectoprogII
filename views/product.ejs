@@ -21,7 +21,7 @@
 			<div class="row">
 				<article class="col-12 col-lg-8 product-detail-info">
 					<img src="<%= product.image %>" alt="" class="product-detail-img">
-					<h3 class="product-detail-description"> Publicado por <a href="/users/profile">   </a></h3>
+					<h3 class="product-detail-description"> Publicado por <a href="/users/profile/<%= product.user.id %>"> <%= product.user.nombre %> <%= product.user.apellido %>   </a></h3>
 					<p class="product-detail-description"> <%= product.descripcion %> </p>
 
 				</article>
@@ -33,7 +33,7 @@
 							<img src="" alt="">
 								<div class="data">
 									<p class="user">
-									<strong> <a href="/users/profile">   : <%= comentario[i].comentario %> </a> </strong>
+									<strong> <a href="/users/profile"> <%= comentario[i].user.nombre %>  : <%= comentario[i].comentario %> </a> </strong>
 									</p>
 								</div>
 							</article>

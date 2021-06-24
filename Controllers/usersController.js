@@ -34,6 +34,7 @@ let controller = {
                return res.render('login') 
             } else {
                 req.session.user = user;
+                console.log(user)
                 if(req.body.recordarme != undefined){
                     res.cookie('user_id', user.id, {maxAge: 1000 * 60 * 5}); //chequear si es userId
                 }
@@ -124,12 +125,12 @@ let controller = {
                     }
                     users.create(user)
                         .then( user => {
+                            console.log(user)
                             return res.redirect('/users')
                         })
                         .catch( err => console.log(err))
                 }
                 console.log('llego al final')
-                console.log(user)
             })
             .catch( err => {
             console.log(err)
