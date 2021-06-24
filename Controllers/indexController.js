@@ -19,7 +19,8 @@ let controller = {
         let searchData = req.query.search;
         product.findAll({
             where: [
-                { modelo: {[op.like]: `%${searchData}%`}}
+                { modelo: {[op.like]: `%${searchData}%`}},
+                { descripcion: {[op.like]: `%${searchData}%`}}
             ]
         })
             .then(resultados => res.render('search-results', { resultados }))

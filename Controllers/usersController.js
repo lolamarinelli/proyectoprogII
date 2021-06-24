@@ -23,9 +23,8 @@ let controller = {
         db.User.findOne({
             where: [{ email: req.body.email }]
         })
-        .then( (user) => {
+        .then( user => {
             if(user==null){
-                console.log("hola")
                errors.login = "Email o la contraseña son incorrectos";
                res.locals.errors = errors;
                return res.render('login') 
@@ -61,25 +60,44 @@ let controller = {
     store: (req, res) => {
         console.log(req.body) 
         let errors = {};
-        //chequear los campos obligatorios
         
-       if(req.body.email == ""){ // El mail no debe esta vacio
+        if(req.body.email == ""){ // El mail no debe esta vacio
             errors.register = "Email no puede estar vacio"
             res.locals.errors = errors
 
             return res.render('register')
 
-       } else if (req.body.password == ""){ // El password no este vacio
-            errors.register = "Password no puede estar vacio"
+        } else if (req.body.nombre == ""){ 
+        errors.register = "Nombre no puede estar vacio"
+        res.locals.errors = errors
+
+        return res.render('register')
+        } else if (req.body.apellido == ""){ 
+            errors.register = "Apellido no puede estar vacio"
             res.locals.errors = errors
 
             return res.render('register')
-       } else if(req.body.repassword == ""){
-            errors.register = "Re escribir password no puede estar vacio"
+        } else if (req.body.fecha == ""){ 
+            errors.register = "Fecha no puede estar vacio"
             res.locals.errors = errors
 
             return res.render('register')
-       } else {
+        } else if (req.body.password == ""){
+            errors.register = "Contraseña no puede estar vacio"
+            res.locals.errors = errors
+
+            return res.render('register')
+        } else if (req.body.password.length <4){ 
+            errors.register = "Password debe tener mas de 3 caracteres"
+            res.locals.errors = errors
+            
+            return res.render('register')
+        } else if(req.body.repassword == ""){
+            errors.register = "Re escribir contraseña no puede estar vacio"
+            res.locals.errors = errors
+
+            return res.render('register')
+        } else {
            users.findOne({where: [{ email : req.body.email}]})
             .then( user => {
                 if(user !==null){
@@ -99,11 +117,10 @@ let controller = {
                         apellido: req.body.apellido,
                         email: req.body.email,
                         fecha: req.body.fecha,
-                        // profile_photo: 'default.png',
                         password: bcrypt.hashSync(req.body.password, 10),
                         repassword: bcrypt.hashSync(req.body.password, 10),
                         image: req.file.filename
-        
+                        // image: 'default-image.png',
                     }
                     users.create(user)
                         .then( user => {
@@ -112,6 +129,7 @@ let controller = {
                         .catch( err => console.log(err))
                 }
                 console.log('llego al final')
+                console.log(user)
             })
             .catch( err => {
             console.log(err)
@@ -121,15 +139,33 @@ let controller = {
 
     //PROFILE
     profile: (req, res)=>{
-    //     let user_id = req.params.id
-    //     product.findAll({
-    //         where:[{user_id: {[op.like]:`${user_id}`}}]
-    // })
-    //         .then((resultados)=> res.render('profile', { resultados }))
-    //         .catch((err)=> `Error: ${err}`)
-        product.findAll()
+        let user_id = req.params.id
+        product.findAll({
+            where:[{user_id: {[op.like]:`${user_id}`}}]
+        })
             .then((resultados)=> res.render('profile', { resultados }))
             .catch((err)=> `Error: ${err}`)
+        
+        // product.findAll()
+        //     .then((resultados)=> res.render('profile', { resultados }))
+        //     .catch((err)=> `Error: ${err}`)
+    },
+    edit: (req, res)=>{
+        let primaryKey = req.params.id;
+        users.findByPk(primaryKey,  {
+            include: [{association: 'comentario'}, {association: 'product'}]
+        })
+            .then(resultados => res.render('profile-edit', { resultados }))
+            .catch(err => console.log(err))
+    }, 
+    update: (req, res)=>{   
+        let primaryKey = req.params.id;
+        let userActualizar = req.body
+        users.update(
+            userActualizar, {where: {id: primaryKey}}
+        )
+            .then(()=> res.redirect('/users/profile'))
+            .catch(err => console.log(err))
     },
 
 }

@@ -1,5 +1,5 @@
 	<!-- Header -->
-	<% if(user=! null){ %> 
+	<% if(user =! null){ %> 
 		<%- include('partials/headerLogueado.ejs') %> 
 	<% } else { %>
 		<%- include('partials/header.ejs') %>
@@ -45,7 +45,7 @@
 				<h2 class="products-title">Más Populares</h2>
 			</div>
 			<!-- Show the "ultimos" products -->
-			<% for(let i=4; i < 8; i++) { %>
+			<% for(let i=4; i < resultados.length; i++) { %>
 				<div class="col-12 col-sm-6 col-lg-3">
 					<section class="product-box">
 						<a href="/product/<%= resultados[i].id %>">

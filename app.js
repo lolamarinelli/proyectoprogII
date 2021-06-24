@@ -11,6 +11,7 @@ var usersRouter = require('./routes/users');
 var productRouter = require('./routes/product');
 
 
+
 var app = express();
 
 // view engine setup
@@ -52,6 +53,7 @@ app.use((req, res, next) => {
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/product', productRouter);
+
 
 
 
