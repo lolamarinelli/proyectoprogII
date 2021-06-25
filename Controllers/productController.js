@@ -6,11 +6,18 @@ const bcrypt = require('bcryptjs')
 let controller = {
     show: (req, res)=>{
         let primaryKey = req.params.id;
-        product.findByPk(primaryKey, {
-            include: [{association: 'user', include:[{association: 'comentario'}]}]
+        // product.findByPk(primaryKey, {
+        //     include: [{association: 'user', 
+        //     include:[{association: 'comentario',
+        //     include:[{association:'user'}]
+        // }]}]
+        // })
+        product.findByPk(primaryKey, 
+            {include: [{association: 'user'}, 
+            {association:'comentario', include:[{association:'user'}]}]
         })
-     .then(product => res.render('product', {product}))  
-          /* .then(product=>res.send(product))  */
+            .then(product => res.render('product', {product}))  
+            // .then(product=>res.send(product)) 
             .catch( err => console.log(err))
     },
     add: (req, res)=>{
@@ -44,20 +51,20 @@ let controller = {
                 .catch(err => console.log(err))
         }   
     },
-    // comentarios: (req, res)=>{
-    //     if(req.session.user == undefined){
-    //         return res.redirect('/users')
-    //     }else{
-    //         let comentarios = {
-    //             comentario: req.body.comentario,
-    //             user_id: res.locals.users.id,
-    //             product_id: res.locals.product.id,
-    //         }
-    //         db.Comentario.create(comentarios)
-    //             .then(() => res.redirect('/'))
-    //             .catch(err => console.log(err))
-    //     }
-    // },
+    comentarios: (req, res)=>{
+        if(req.session.user == undefined){
+            return res.redirect('/users')
+        }else{
+            let comentarios = {
+                comentario: req.body.comentario,
+                user_id: res.locals.users.id,
+                product_id: res.locals.product.id,
+            }
+            db.Comentario.create(comentarios)
+                .then(() => res.redirect('/product'))
+                .catch(err => console.log(err))
+        }
+    },
     edit: (req, res)=>{
         let primaryKey = req.params.id;
         product.findByPk(primaryKey,  {

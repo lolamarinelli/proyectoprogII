@@ -142,15 +142,21 @@ let controller = {
     profile: (req, res)=>{
         let user_id = req.params.id
         product.findAll({
+            include: [{association: 'comentario'}, {association: 'user'}],
             where:[{user_id: {[op.like]:`${user_id}`}}]
         })
             .then((resultados)=> res.render('profile', { resultados }))
             .catch((err)=> `Error: ${err}`)
-        
-        // product.findAll()
-        //     .then((resultados)=> res.render('profile', { resultados }))
-        //     .catch((err)=> `Error: ${err}`)
     },
+    // otherProfile: (req, res)=>{
+    //     let user_id = req.params.id
+    //     product.findAll({
+    //         include: [{association: 'comentario'}, {association: 'user'}],
+    //         where:[{user_id: {[op.like]:`${user_id}`}}]
+    //     })
+    //         .then((resultados)=> res.render('profile', { resultados }))
+    //         .catch((err)=> `Error: ${err}`)
+    // },
     edit: (req, res)=>{
         let primaryKey = req.params.id;
         users.findByPk(primaryKey,  {
@@ -165,7 +171,7 @@ let controller = {
         users.update(
             userActualizar, {where: {id: primaryKey}}
         )
-            .then(()=> res.redirect('/users/profile'))
+            .then(()=> res.redirect('/'))
             .catch(err => console.log(err))
     },
 

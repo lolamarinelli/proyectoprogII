@@ -1,5 +1,5 @@
 <!-- Header -->
-<% if(user=! null){ %> 
+<% if(resultados.user != null){ %> 
 	<%- include('partials/headerLogueado.ejs') %> 
 <% } else { %>
 	<%- include('partials/header.ejs') %>
@@ -18,7 +18,7 @@
 		<% for(let i=0; i < resultados.length; i++) { %>
 			<div class="col-12 col-sm-6 col-lg-3">
 				<section class="product-box">
-					<a href="/product/<%= resultados[i].id %> ">
+					<a href="/product/products/<%= resultados[i].id %> ">
 						<figure class="product-box_image">
 							<img src="<%= resultados[i].image %> " alt="Jordans">
 						</figure>
@@ -26,6 +26,7 @@
 							<h2> <%= resultados[i].modelo %> </h2>
 							<p> <%= resultados[i].descripcion %>  </p>
 							<p> Comentarios:<%= resultados[i].comentarios %>  </p>
+							<a href="/users/profile/<%= resultados[i].user.id %>"> <%= resultados[i].user.nombre %> <%= resultados[i].user.apellido %> </a>
 						</article> 
 					</a>
 				</section>

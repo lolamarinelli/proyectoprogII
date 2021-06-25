@@ -22,7 +22,7 @@ router.post('/register', upload.single("avatar"),usersController.store); // guar
 router.post('/logout', usersController.logout) 
 router.get('/profile/:id', usersController.profile) 
 router.get('/profile/profile-edit/:id', usersController.edit) 
-router.post('/profile/profile-edit/:id', usersController.update) 
+router.post('/profile/profile-edit/:id', upload.single("image"), usersController.update) 
 
 
 

@@ -21,7 +21,8 @@ let controller = {
             where: [
                 { modelo: {[op.like]: `%${searchData}%`}},
                 { descripcion: {[op.like]: `%${searchData}%`}}
-            ]
+            ],
+            include: [{association: 'comentario'}, {association: 'user'}],
         })
             .then(resultados => res.render('search-results', { resultados }))
             .catch(err=> console.log(err))
