@@ -1,5 +1,5 @@
 	<!-- Header -->
-	<% if(resultados != null){ %> 
+	<% if(locals.id != null){ %> 
 		<%- include('partials/headerLogueado.ejs') %> 
 	<% } else { %>
 		<%- include('partials/header.ejs') %>
@@ -30,7 +30,7 @@
 								<h2> <%= resultados[i].modelo %> </h2>
 								<p> <%= resultados[i].descripcion %> </p>
 								<p> Comentarios: <%= resultados[i].comentarios %>  </p>  <!-- chequear reultados.comentarios no existe creo -->
-								<a href="/users/profile/<%= resultados[i].user.id %>"> <%= resultados[i].user.nombre %> <%= resultados[i].user.apellido %> </a>
+								<p><a href="/users/other-profiles/<%= resultados[i].user.id %>"> <%= resultados[i].user.nombre %> <%= resultados[i].user.apellido %> </a></p>
 							</article> 
 						</a>
 					</section>
@@ -57,7 +57,7 @@
 								<h2> <%= resultados[i].modelo %> </h2>
 								<p> <%= resultados[i].descripcion %> </p>
 								<p> Comentarios: <%= resultados[i].comentarios %> </p>
-								<a href="/users/profile/<%= resultados[i].user.id %>"> <%= resultados[i].user.nombre %> <%= resultados[i].user.apellido %> </a>
+								<p><a class="nombre" href="/users/other-profiles/<%= resultados[i].user.id %>"> <%= resultados[i].user.nombre %> <%= resultados[i].user.apellido %> </a></p>
 							</article> 
 						</a>
 					</section>

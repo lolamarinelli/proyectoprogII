@@ -21,6 +21,7 @@ router.get('/register', usersController.register)
 router.post('/register', upload.single("avatar"),usersController.store); // guardar el usuarios
 router.post('/logout', usersController.logout) 
 router.get('/profile/:id', usersController.profile) 
+router.get('/other-profiles/:id', usersController.otherProfiles) 
 router.get('/profile/profile-edit/:id', usersController.edit) 
 router.post('/profile/profile-edit/:id', upload.single("image"), usersController.update) 
 

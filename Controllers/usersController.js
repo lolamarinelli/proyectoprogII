@@ -148,15 +148,15 @@ let controller = {
             .then((resultados)=> res.render('profile', { resultados }))
             .catch((err)=> `Error: ${err}`)
     },
-    // otherProfile: (req, res)=>{
-    //     let user_id = req.params.id
-    //     product.findAll({
-    //         include: [{association: 'comentario'}, {association: 'user'}],
-    //         where:[{user_id: {[op.like]:`${user_id}`}}]
-    //     })
-    //         .then((resultados)=> res.render('profile', { resultados }))
-    //         .catch((err)=> `Error: ${err}`)
-    // },
+    otherProfiles: (req, res)=>{
+        let user_id = req.params.id
+        product.findAll({
+            include: [{association: 'comentario'}, {association: 'user'}],
+            where:[{user_id: {[op.like]:`${user_id}`}}]
+        })
+            .then((resultados)=> res.render('other-profiles', { resultados }))
+            .catch((err)=> `Error: ${err}`)
+    },
     edit: (req, res)=>{
         let primaryKey = req.params.id;
         users.findByPk(primaryKey,  {

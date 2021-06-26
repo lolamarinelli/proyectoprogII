@@ -1,0 +1,63 @@
+<!-- Header -->
+<%- include('partials/headerLogueado.ejs') %> 
+<!-- /Header -->
+
+<!-- Datos del usuario -->
+<% for(let i=0; i < 1; i++) { %>
+
+<section class="info-usuario container usuario-wrapper">
+    <div class="row">
+        <div class="img-container offset-3 col-2">
+            <img src="<%= resultados[i].user.image %>" alt="foto de perfil" class="foto-perfil">
+        </div>
+        <div class="data-container col-6">
+            <div class="d-flex align-items-center ">
+                <h1 class="main-title"> <%= resultados[i].user.nombre %> <%= resultados[i].user.apellido %></h1>
+                <a class="btn mt-3 ml-4" href="/">SEGUIR</a>
+            </div>
+            <div>
+                <ul class="">
+                    <li> productos</li>
+                    <li> comentarios</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<% } %>
+<!-- /Datos del usuario -->
+
+<!-- Mis productos -->
+<div class="container products-wrapper">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="products-title">Mis productos</h2>
+        </div>
+        <!-- Show mis productos -->
+        <% for(let i=0; i < resultados.length; i++) { %>
+            <div class="col-12 col-sm-6 col-lg-3">
+                <section class="product-box">
+                    <a href="/product/products/<%= resultados[i].id %> ">
+                        <figure class="product-box_image">
+                            <img src="<%= resultados[i].image %> " alt="Jordans">
+                        </figure>
+                        <article class="product-box_data">
+                            <h2> <%= resultados[i].modelo %> </h2>
+                            <p> <%= resultados[i].descripcion %>  </p>
+                            <p> Comentarios:<%= resultados[i].comentarios %>  </p>
+                            <p> <a href="/users/other-profiles/<%= resultados[i].user.id %>"> <%= resultados[i].user.nombre %> <%= resultados[i].user.apellido %> </a></p>
+                        </article> 
+                    </a>
+                </section>
+            </div>
+        <% } %>
+    </div>
+</div>
+<!-- /Mis productos -->
+
+
+<!-- footer -->
+<%- include('partials/footer.ejs') %>
+</body>	
+</html>

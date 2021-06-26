@@ -1,7 +1,7 @@
 let db = require("../database/models")
 const product = db.Product
 const user = db.User
-const comentario = db.Comentario
+// const comentario = db.Comentario
 const op = db.Sequelize.Op
 const bcrypt = require('bcryptjs') 
 
@@ -14,7 +14,6 @@ let controller = {
             .then((resultados)=> res.render('index', { resultados }))
             .catch((err)=> `Error: ${err}`)
     },
-    
     search: (req, res)=>{
         let searchData = req.query.search;
         product.findAll({
