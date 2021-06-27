@@ -12,27 +12,27 @@
 			<form action="/users/profile/profile-edit/<%= locals.id %>" class="row g-3" method="POST" enctype="multipart/form-data">
 				<div class="col-12">
 					<label for="inputAddress" class="form-label">Editar Nombre</label>
-					<input type="text" value="<%locals.nombre%>" class="form-control" id="nombre" placeholder="Escribe aquí tu nombre">
+					<input type="text" name="nombre" value="<%=locals.nombre%>" class="form-control" id="nombre" placeholder="Escribe aquí tu nombre">
 				</div>
 				<div class="col-12">
 					<label for="inputAddress2" class="form-label">Editar Apellido</label>
-					<input type="text" value="<%locals.apellido%>" class="form-control" id="apellido" placeholder="Escribe aquí tu apellido">
+					<input type="text" name="apellido" value="<%=locals.apellido%>" class="form-control" id="apellido" placeholder="Escribe aquí tu apellido">
 				</div>
 				<div class="col-md-6">
 					<label for="inputCity" class="form-label">Editar Fecha de Nacimiento</label>
-					<input type="date" value="<%locals.fecha%>" class="form-control" id="date">
+					<input type="date" name="fecha" value="<%=locals.fecha%>" class="form-control" id="date">
 				</div>
 				<div class="col-md-6">
 					<label for="inputEmail4" class="form-label">Cambiar Email</label>
-					<input type="email" value="<%locals.email%>" class="form-control" id="inputEmail4">
+					<input type="email" name="email" value="<%=locals.email%>" class="form-control" id="inputEmail4">
 				</div>
 				<div class="col-md-6">
 					<label for="inputPassword4" class="form-label">Cambiar Contraseña</label>
-					<input type="password" value="<%locals.password%>" class="form-control" id="inputPassword4">
+					<input type="password" name="password" value="<%=locals.password%>" class="form-control" id="inputPassword4">
 				</div>
 				<div class="col-md-6">
 					<label for="inputEmail4" class="form-label">Imagen</label>
-					<input type="file" value="<%locals.image%>" class="form-control img-form" name="image" id="image"  alt="submit">	
+					<input type="file" name="image" value="<%=locals.image%>" class="form-control img-form" id="image"  alt="submit">	
 				</div>
 				<div class="col-12">
 					<button type="submit" class="btn btn-primary">Guardar</button>

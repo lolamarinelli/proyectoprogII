@@ -81,17 +81,9 @@ let controller = {
                 if(req.session.user == undefined){
                     return res.redirect(`/product/products/${primaryKey}`)
                 }else if(req.session.user.id == resultados.user_id){
-                    db.Comentario.destroy({
-                        where: {
-                            product_id: primaryKey
-                        }
-                    })
+                    db.Comentario.destroy({where: {product_id: primaryKey}})
                     .then(()=>
-                        product.destroy({
-                            where: {
-                                id: primaryKey
-                            } 
-                        })
+                        product.destroy({where: {id: primaryKey}})
                         .then(()=> res.redirect('/'))
                     )
                 }else{

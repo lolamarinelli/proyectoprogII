@@ -158,20 +158,37 @@ let controller = {
             .catch((err)=> `Error: ${err}`)
     },
     edit: (req, res)=>{
-        let primaryKey = req.params.id;
-        users.findByPk(primaryKey,  {
-            include: [{association: 'comentario'}, {association: 'product'}]
-        })
-            .then(resultados => res.render('profile-edit', { resultados }))
-            .catch(err => console.log(err))
+        if(req.session.user == undefined){
+            res.redirect('/')
+        }else{
+            let primaryKey = req.params.id;
+            users.findByPk(primaryKey,  {
+                include: [{association: 'comentario'}, {association: 'product'}]
+            })
+                .then(resultados => res.render('profile-edit', { resultados }))
+                .catch(err => console.log(err))
+        }    
     }, 
     update: (req, res)=>{   
         let primaryKey = req.params.id;
-        let userActualizar = req.body
-        users.update(
-            userActualizar, {where: {id: primaryKey}}
-        )
-            .then(()=> res.redirect('/'))
+        db.User.findByPk(primaryKey)
+            .then((users)=>{
+                if(req.session.user == undefined){
+                    res.redirect('/')
+                }else{
+                    let userActualizar = {
+                        nombre: req.body.nombre,
+                        apellido: req.body.apellido,
+                        email: req.body.email,
+                        fecha: req.body.fecha,
+                        password: req.body.password,
+                        image: req.body.image
+                    }
+                    db.User.update(userActualizar, {where:{id: primaryKey}})
+                        .then(()=> res.redirect(`/users/profile/${users.id}`))
+                        .catch(err => console.log(err))
+                }
+            })
             .catch(err => console.log(err))
     },
 
