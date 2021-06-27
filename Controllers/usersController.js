@@ -151,7 +151,7 @@ let controller = {
     otherProfiles: (req, res)=>{
         let user_id = req.params.id
         product.findAll({
-            include: [{association: 'comentario'}, {association: 'user'}],
+            include: [{association: 'comentario'}, {association: 'user', include: [{association: 'comentario'}]}],
             where:[{user_id: {[op.like]:`${user_id}`}}]
         })
             .then((resultados)=> res.render('other-profiles', { resultados }))

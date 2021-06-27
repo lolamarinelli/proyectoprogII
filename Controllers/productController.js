@@ -66,16 +66,7 @@ let controller = {
         }
         
     },
- /*    createCom: (req, res)=>{
-        let primaryKey = req.params.id;
-        product.findByPk(primaryKey, 
-            {include: [{association: 'user'}, 
-            {association:'comentario', include:[{association:'user'}]}]
-        })
-            .then(product => res.render('product', {product}))  
-            // .then(product=>res.send(product)) 
-            .catch( err => console.log(err))
-    }, */
+
 
 
     edit: (req, res)=>{
@@ -92,7 +83,7 @@ let controller = {
         product.update(
             productoActualizar, {where: {id: primaryKey}}
         )
-            .then(()=> res.redirect('/'))
+            .then(()=> res.redirect(`/product/products/${req.params.id}`))
             .catch(err => console.log(err))
     },
     borrar: (req, res)=>{

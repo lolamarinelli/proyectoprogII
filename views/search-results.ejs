@@ -25,7 +25,7 @@
 						<article class="product-box_data">
 							<h2> <%= resultados[i].modelo %> </h2>
 							<p> <%= resultados[i].descripcion %>  </p>
-							<p> Comentarios:<%= resultados[i].comentarios %>  </p>
+							<p> Comentarios: <%=resultados[i].comentario.length  %>  </p>
 							<p><a href="/users/other-profiles/<%= resultados[i].user.id %>"> <%= resultados[i].user.nombre %> <%= resultados[i].user.apellido %> </a> </p>
 						</article> 
 					</a>
