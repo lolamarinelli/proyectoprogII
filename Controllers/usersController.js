@@ -120,8 +120,8 @@ let controller = {
                         fecha: req.body.fecha,
                         password: bcrypt.hashSync(req.body.password, 10),
                         repassword: bcrypt.hashSync(req.body.password, 10),
-                        image: req.file.filename
-                        // image: 'default-image.png',
+                        image: `/images/users/${req.file.filename}`
+                        
                     }
                     users.create(user)
                         .then( user => {

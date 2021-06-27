@@ -8,13 +8,19 @@
 	<!-- product detail -->
 	<div class="container products-wrapper">
 		<div class="d-flex align-items-center">
+
 			<h2 class="products-title"> <%= product.modelo %></h2> 
+			<% if (locals.id == product.user_id){ %>
+
+			
 			<p class="product-detail-description">
 				<a href="/product/product-edit/<%= product.id %>">Editar</a>
 				<form style="display: inline;" action="/product/products/<%=product.id %>" method="POST">
 					<button class="btn btn-danger" type="submit">Borrar</button>
 				</form>
 			</p>
+
+			<%}%>
 		</div>
 		<div class="product-detail">
 			<div class="row">
@@ -38,7 +44,7 @@
 						<% } %>
 					</section>
 					<form class="form" action="/product/products/<%= product.id %>" method="POST">
-						<input class="form-input" type="text" value="" placeholder="Agregar comentario">
+						<input class="form-input" name="comentario" type="text" value="" placeholder="Agregar comentario">
 						<button type="submit" class="buy-now-button">AGREGAR COMENTARIO</button>
 					</form>
 				</div>

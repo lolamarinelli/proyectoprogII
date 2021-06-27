@@ -57,14 +57,27 @@ let controller = {
         }else{
             let comentarios = {
                 comentario: req.body.comentario,
-                user_id: res.locals.users.id,
-                product_id: res.locals.product.id,
+                user_id: req.session.user.id,
+                product_id: req.params.id
             }
             db.Comentario.create(comentarios)
-                .then(() => res.redirect('/product'))
+                .then(() => res.redirect(`/product/products/${req.params.id}`))
                 .catch(err => console.log(err))
         }
+        
     },
+ /*    createCom: (req, res)=>{
+        let primaryKey = req.params.id;
+        product.findByPk(primaryKey, 
+            {include: [{association: 'user'}, 
+            {association:'comentario', include:[{association:'user'}]}]
+        })
+            .then(product => res.render('product', {product}))  
+            // .then(product=>res.send(product)) 
+            .catch( err => console.log(err))
+    }, */
+
+
     edit: (req, res)=>{
         let primaryKey = req.params.id;
         product.findByPk(primaryKey,  {
