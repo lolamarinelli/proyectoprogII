@@ -1,6 +1,6 @@
 const db = require('../database/models')
 const product = db.Product
-// const comentario = db.Comentario
+const comentario = db.Comentario
 const users = db.User
 const op = db.Sequelize.Op
 const bcrypt = require('bcryptjs') 
@@ -142,7 +142,7 @@ let controller = {
     profile: (req, res)=>{
         let user_id = req.params.id
         product.findAll({
-            include: [{association: 'comentario'}, {association: 'user'}],
+            include: [{association: 'comentario'}, {association: 'user', include: [{association: 'comentario'}]}],
             where:[{user_id: {[op.like]:`${user_id}`}}]
         })
             .then((resultados)=> res.render('profile', { resultados }))
@@ -151,7 +151,7 @@ let controller = {
     otherProfiles: (req, res)=>{
         let user_id = req.params.id
         product.findAll({
-            include: [{association: 'comentario'}, {association: 'user', include: [{association: 'comentario'}]}],
+            include: [{association: 'comentario'}, {association: 'user', include: [{association: 'comentario'}], include: [{association: 'product'}] }],
             where:[{user_id: {[op.like]:`${user_id}`}}]
         })
             .then((resultados)=> res.render('other-profiles', { resultados }))

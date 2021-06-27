@@ -28,9 +28,6 @@ module.exports = (sequelize, dataTypes)=>{
         fecha :{
             type: dataTypes.DATE
         }, 
-        seguidores :{
-            type: dataTypes.INTEGER
-        },
         created_at: {
             type: dataTypes.DATE,
             allowNull: true,

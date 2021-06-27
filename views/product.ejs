@@ -26,7 +26,7 @@
 			<div class="row">
 				<article class="col-12 col-lg-8 product-detail-info">
 					<img src="<%= product.image %>" alt="" class="product-detail-img">
-					<h3 class="product-detail-description"> Publicado por <a href="/users/other-profiles/<%= product.user.id %>"> <%= product.user.nombre %> <%= product.user.apellido %>   </a></h3> 
+					<h3 class="product-detail-description"> Publicado por <a href="/users/other-profiles/<%= product.user.id %>"> <%= product.user.nombre %> <%= product.user.apellido %>  </a> el  <%= product.created_at %></h3> 
 					<p class="product-detail-description"> <%= product.descripcion %> </p>
 				</article>
 				<div class="col-12 col-lg-4">
@@ -38,12 +38,13 @@
 								<div class="data">
 									<p class="user">
 									<strong> <a href="/users/other-profiles/<%= comentario[i].user.id %>"> <%= comentario[i].user.nombre %> <%= comentario[i].user.apellido %> </a> : <%= comentario[i].comentario %>  </strong>
+									<p><%= comentario[i].created_at %></p>
 									</p>
 								</div>
 							</article>
 						<% } %>
 					</section>
-					<form class="form" action="/product/products/<%= product.id %>" method="POST">
+					<form class="form" action="/product/products/comentarios/<%= product.id %>" method="POST">
 						<input class="form-input" name="comentario" type="text" value="" placeholder="Agregar comentario">
 						<button type="submit" class="buy-now-button">AGREGAR COMENTARIO</button>
 					</form>

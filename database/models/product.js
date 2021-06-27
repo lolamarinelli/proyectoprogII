@@ -16,9 +16,6 @@ module.exports = (sequelize, dataTypes)=>{
         descripcion: {
             type: dataTypes.STRING
         },
-        /* fecha :{
-            type: dataTypes.DATE
-        }, */
         created_at: {
             type: dataTypes.DATE,
             allowNull: true,

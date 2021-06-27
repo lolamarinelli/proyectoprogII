@@ -1,23 +1,16 @@
 const db = require('../database/models')
 const product = db.Product
+const comentario = db.Comentario
 const op = db.Sequelize.Op
 const bcrypt = require('bcryptjs') 
 
 let controller = {
     show: (req, res)=>{
         let primaryKey = req.params.id;
-        // product.findByPk(primaryKey, {
-        //     include: [{association: 'user', 
-        //     include:[{association: 'comentario',
-        //     include:[{association:'user'}]
-        // }]}]
-        // })
-        product.findByPk(primaryKey, 
-            {include: [{association: 'user'}, 
-            {association:'comentario', include:[{association:'user'}]}]
+        product.findByPk(primaryKey, {
+            include: [{association: 'user'},{association:'comentario', include:[{association:'user'}]}],
         })
             .then(product => res.render('product', {product}))  
-            // .then(product=>res.send(product)) 
             .catch( err => console.log(err))
     },
     add: (req, res)=>{
@@ -26,7 +19,6 @@ let controller = {
         })
             .then(product => res.render('product-add', {product})) 
             .catch( err => console.log(err))
-        // return res.render('product-add')
     },
     store: (req, res)=>{
         let errors = {}
@@ -64,11 +56,7 @@ let controller = {
                 .then(() => res.redirect(`/product/products/${req.params.id}`))
                 .catch(err => console.log(err))
         }
-        
     },
-
-
-
     edit: (req, res)=>{
         let primaryKey = req.params.id;
         product.findByPk(primaryKey,  {
@@ -88,23 +76,29 @@ let controller = {
     },
     borrar: (req, res)=>{
         let primaryKey = req.params.id;
-        product.destroy({
-            where: {
-                id: primaryKey
-            }
-        })
-            .then(()=> res.redirect('/'))
-            .catch(err=> console.log(err))
-    },
-    destroy: (req, res)=>{
-        let primaryKey = req.params.id;
-        product.destroy({
-            where: {
-                id: primaryKey
-            }
-        })
-            .then(()=> res.redirect('/'))
-            .catch(err=> console.log(err))
+        product.findByPk(primaryKey)
+            .then(resultados => {
+                if(req.session.user == undefined){
+                    return res.redirect(`/product/products/${primaryKey}`)
+                }else if(req.session.user.id == resultados.user_id){
+                    db.Comentario.destroy({
+                        where: {
+                            product_id: primaryKey
+                        }
+                    })
+                    .then(()=>
+                        product.destroy({
+                            where: {
+                                id: primaryKey
+                            } 
+                        })
+                        .then(()=> res.redirect('/'))
+                    )
+                }else{
+                    return res.redirect('/')
+                }
+            })
+            .catch(err =>console.log(err))
     },
 }
 
